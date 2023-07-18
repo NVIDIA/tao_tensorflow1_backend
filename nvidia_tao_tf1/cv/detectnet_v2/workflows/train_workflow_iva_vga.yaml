@@ -1,0 +1,33 @@
+version: 2
+storageSecret: iva-swift-creds
+experimental:
+  queueType: redis_binary
+tasks:
+- name: sleep2
+  inputs:
+  - volume:
+      name: Demo_Icetana_2_181116_hres
+      version: 74a75991-673e-4aa5-8b63-293ca3c4b005
+    prefix: /Demo_Icetana_2_181116
+  - volume:
+      name: Demo_Icetana_3_181207_hres
+      version: 99a06ff3-74dd-43d0-8e2c-9ad5fe8d41aa
+    prefix: /Demo_Icetana_3_181207
+
+  outputs:
+    - url: swift://swiftstack-maglev.ngc.nvidia.com/iva/iva-artifacts/
+      path: 'astro_experiments/{{workflow_name}}'
+  local_image: bazel/iva/common:image
+  command: /bin/bash
+  args: [ "-euxo", "pipefail", "-c", "export DATA_BASE_PATH={{input}} && iva/detectnet_v2/scripts/train -e {{input}}/tmp/subha/peoplenet_2.0/resnet_18/hres/resnet_experiment_specs/astro_peoplenet_2_0_vga.txt -r {{output}}/tmp/subha/peoplenet_2.0/resnet_18/hre/results_launcher -k tlt_encode"]
+  group: all
+  fail: never
+  cache: disable
+  workerPool: pool-8-gpu
+
+workerPools:
+- name: pool-8-gpu
+  workers: 1
+  cpu: "72"
+  gpu: "8"
+  mem: 432G

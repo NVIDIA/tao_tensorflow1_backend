@@ -1,0 +1,206 @@
+random_seed: 42
+yolov4_config {
+    mid_anchor_shape: "[(5.00, 5.50), (11.00, 10.07), (13.00, 28.00)]"
+    big_anchor_shape: "[(24.00, 17.13), (40.00, 45.33), (94.32, 144.00)]"
+    box_matching_iou: 0.25
+    matching_neutral_box_iou: 0.5
+    arch: "cspdarknet_tiny"
+    loss_loc_weight: 0.8
+    loss_neg_obj_weights: 100.0
+    loss_class_weights: 0.5
+    label_smoothing: 0.0
+    big_grid_xy_extend: 0.05
+    mid_grid_xy_extend: 0.05
+    freeze_bn: false
+    #freeze_blocks: 0
+    force_relu: false
+}
+training_config {
+  batch_size_per_gpu: 8
+  num_epochs: 80
+  enable_qat: false
+  checkpoint_interval: 10
+  learning_rate {
+  soft_start_annealing_schedule {
+    min_learning_rate: 5e-6
+    max_learning_rate: 3e-4
+    soft_start: 0.1
+    annealing: 0.5
+    }
+  }
+  regularizer {
+    type: L1
+    weight: 3e-6
+  }
+  optimizer {
+    adam {
+      epsilon: 1e-7
+      beta1: 0.9
+      beta2: 0.999
+      amsgrad: false
+    }
+  }
+}
+eval_config {
+  average_precision_mode: INTEGRATE
+  batch_size: 16
+  matching_iou_threshold: 0.5
+}
+nms_config {
+  confidence_threshold: 0.01
+  clustering_iou_threshold: 0.6
+  force_on_cpu: true
+  top_k: 200
+}
+augmentation_config {
+  hue: 0.1
+  saturation: 1.5
+  exposure:1.5
+  vertical_flip:0
+  horizontal_flip: 0.5
+  jitter: 0.3
+  output_width: 960
+  output_height: 544
+  output_channel: 3
+  randomize_input_shape_period: 10
+  mosaic_prob: 0.5
+  mosaic_min_ratio:0.2
+}
+dataset_config {
+  data_sources: {
+    image_directory_path: "/raid/media/IVAData2/datasets/ivalarge_cyclops-b/images/JPEG_half"
+    label_directory_path: "/raid/media/IVAData2/datasets/ivalarge_cyclops-b/labels/labels_hres"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-01_181016/images_kitti"
+    label_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-01_181016/labels_kitti"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_704_0_181016/images_kitti"
+    label_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_704_0_181016/labels_kitti"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_1280_0_181016/images_kitti"
+    label_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_1280_0_181016/labels_kitti"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_1920_0_181016/images_kitti"
+    label_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_1920_0_181016/labels_kitti"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0004-14_and_IVA_0008-14_SJSU/IVA-0004-14_180524/images_final_hres"
+    label_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0004-14_and_IVA_0008-14_SJSU/IVA-0004-14_180524/labels_final_960x544"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0009/IVA-0009-01_180529/images_final_hres"
+    label_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0009/IVA-0009-01_180529/labels_final_hres"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0009/IVA-0009-02_180529/images_final_hres"
+    label_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0009/IVA-0009-02_180529/labels_final_hres"
+  }
+  data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0009/IVA-0009-03_20180618/images_final_hres"
+    label_directory_path: "/raid/media/projects2_metropolis/datasets/people_face_test/IVA-0009/IVA-0009-03_20180618/labels_final_hres"
+  }
+  target_class_mapping {
+    key: "AutoMobile"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "Automobile"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "Bicycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "Heavy Truck"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "Motorcycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "Person"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "Person Group"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "Rider"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "Road sign"
+    value: "road_sign"
+  }
+  target_class_mapping {
+    key: "Vehicle"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "automobile"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "bicycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "heavy_truck"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "largevehicle"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "motorcycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "person"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "person group"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "person_group"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "rider"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "road sign"
+    value: "road_sign"
+  }
+  target_class_mapping {
+    key: "road_sign"
+    value: "road_sign"
+  }
+  target_class_mapping {
+    key: "traffic_light"
+    value: "road_sign"
+  }
+  target_class_mapping {
+    key: "twowheeler"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "vehicle"
+    value: "car"
+  }
+  validation_data_sources: {
+    image_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_1280_0_181016/images_kitti"
+    label_directory_path: "/raid/media/projects2_metropolis/exports/IVA-0010-02_1280_0_181016/labels_kitti"
+  }
+}

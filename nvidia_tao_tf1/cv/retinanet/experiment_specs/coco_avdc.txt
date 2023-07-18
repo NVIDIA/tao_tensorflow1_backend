@@ -1,0 +1,100 @@
+random_seed: 42
+
+dataset_config {
+  type: "coco"
+
+  data_sources: {
+    label_directory_path: "datasets/a/annotations"
+    image_directory_path: "datasets/a/raw-data/train2017"
+  }
+  validation_data_sources: {
+    label_directory_path: "datasets/a/annotations"
+    image_directory_path: "datasets/a/raw-data/val2017"
+  }
+}
+
+augmentation_config {
+
+    output_width: 608
+
+    output_height: 608
+
+    output_channel: 3
+}
+
+training_config {
+
+  batch_size_per_gpu: 16
+
+  num_epochs: 50
+  checkpoint_interval: 1
+  learning_rate {
+
+    soft_start_annealing_schedule {
+
+      min_learning_rate: 5e-5
+
+      max_learning_rate: 1e-2
+ 
+      soft_start: 0.02
+
+      annealing: 0.32
+
+    }
+
+  }
+
+  regularizer {
+
+    type: L1
+
+    weight: 1e-6
+
+  }
+
+}
+
+eval_config {
+
+
+  batch_size: 16
+  validation_period_during_training: 10
+  matching_iou_threshold: 0.5
+
+}
+
+nms_config {
+
+  confidence_threshold: 0.01
+
+  clustering_iou_threshold: 0.5
+
+  top_k: 200
+
+}
+
+retinanet_config {
+
+  aspect_ratios_global: "[1.0, 2.0, 0.5]"
+
+  scales: "[0.05, 0.15, 0.3, 0.45, 0.6, 0.75]"
+
+  variances: "[0.1, 0.1, 0.2, 0.2]"
+
+  arch: "resnet"
+
+  loss_loc_weight: 1.0
+
+  focal_loss_alpha: 0.25
+
+  focal_loss_gamma: 2
+
+  freeze_blocks: 0
+
+  nlayers: 18
+
+  n_kernels: 2
+
+  feature_size: 256
+
+}

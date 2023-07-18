@@ -1,0 +1,41 @@
+version: 2
+storageSecret: iva-swift-creds
+experimental:
+  queueType: redis_binary 
+
+tasks:
+
+- name: train_coco
+  local_image: bazel/iva/common:image
+  
+  inputs:
+  - volume:
+      name: coco-volumn
+      version: 64ef36d7-6ebf-488c-ac16-b86ab3c0c150
+    prefix: /datasets/a
+  outputs:
+  - url: swift://swiftstack-maglev.ngc.nvidia.com/iva/iva-scratch/yuw
+    path: "{{workflow_name}}/"
+  command: /bin/bash
+  args: ["-euxo" ,"pipefail", "-c", "export DATA_BASE_PATH={{input}} && \
+                                    nvidia_tao_tf1/cv/retinanet/scripts/train \
+                                    -e nvidia_tao_tf1/cv/retinanet/experiment_specs/coco_avdc.txt \
+                                    -r {{output}} \
+                                    --root_path {{input}} \
+                                    -k nvidia_tlt"]
+  fail: never
+  group: all
+  cache: disable
+  workerPool: pool-4-gpu
+
+
+
+workerPools:
+  - name: pool-4-gpu
+    workers: 1
+    cpu: "60"
+    gpu: "4"
+    mem: 64G
+  
+
+

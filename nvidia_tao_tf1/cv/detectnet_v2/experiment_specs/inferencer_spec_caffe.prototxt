@@ -1,0 +1,113 @@
+inferencer_config{
+  # Defining input node of the model
+  input_nodes: "input_1"
+  output_nodes: "output_cov/Sigmoid"
+  output_nodes: "output_bbox"
+  # defining target class names for the experiment.
+  # Note: This must be mentioned in order of the networks classes.
+  target_classes: "person"
+  target_classes: "bag"
+  target_classes: "face"
+  # Inference dimensions.
+  image_width: 960
+  image_height: 544
+  # Must match what the model was trained for.
+  image_channels: 3
+  batch_size: 16
+  gpu_index: 0
+  stride: 16
+  # model handler config
+  tensorrt_config{
+    parser:  CAFFE
+    prototxt: "/home/projects1_metropolis/tmp/AU/Astro/astro_V1.3/results_aiinfra/resnet18/hr/resnet18_pbf_s16_hr_ph1/weights/resnet18_astro_V1.3_pbf_s16_hr_ph1.hdf5.prototxt"
+    caffemodel: "/home/projects1_metropolis/tmp/AU/Astro/astro_V1.3/results_aiinfra/resnet18/hr/resnet18_pbf_s16_hr_ph1/weights/resnet18_astro_V1.3_pbf_s16_hr_ph1.hdf5.caffemodel"
+    backend_data_type: INT8
+    save_engine: true
+    trt_engine: "/home/project_ivadata.cosmos369/scratch_space/inferences/outputs/astro_refactor_inference.trt"
+    calibrator_config{
+        calibration_cache: "/home/projects1_metropolis/tmp/AU/Astro/astro_V1.3/INT8/CalibrationTable_Astro_V1.3_HQ"
+        n_batches: 10
+        batch_size: 16
+    }
+  }
+}
+bbox_handler_config{
+  kitti_dump: true
+  disable_overlay: false
+  overlay_linewidth: 2
+  classwise_bbox_handler_config{
+    key:"person"
+    value: {
+      confidence_model: "aggregate_cov"
+      output_map: "person"
+      bbox_color{
+        R: 0
+        G: 255
+        B: 0
+      }
+      clustering_config{
+        coverage_threshold: 0.00
+        dbscan_eps: 0.3
+        dbscan_min_samples: 1
+        dbscan_confidence_threshold: 0.9
+        minimum_bounding_box_height: 4
+      }
+    }
+  }
+  classwise_bbox_handler_config{
+    key:"bag"
+    value: {
+      confidence_model: "aggregate_cov"
+      output_map: "bag"
+      bbox_color{
+        R: 0
+        G: 255
+        B: 255
+      }
+      clustering_config{
+        coverage_threshold: 0.00
+        dbscan_eps: 0.3
+        dbscan_min_samples: 1
+        dbscan_confidence_threshold: 0.9
+        minimum_bounding_box_height: 4
+      }
+    }
+  }
+  classwise_bbox_handler_config{
+    key:"face"
+    value: {
+      confidence_model: "aggregate_cov"
+      output_map: "face"
+      bbox_color{
+        R: 255
+        G: 0
+        B: 0
+      }
+      clustering_config{
+        coverage_threshold: 0.00
+        dbscan_eps: 0.3
+        dbscan_min_samples: 1
+        dbscan_confidence_threshold: 0.9
+        minimum_bounding_box_height: 4
+      }
+    }
+  }
+  classwise_bbox_handler_config{
+    key:"default"
+    value: {
+      confidence_model: "aggregate_cov"
+      bbox_color{
+        R: 255
+        G: 0
+        B: 0
+      }
+      clustering_config{
+        coverage_threshold: 0.00
+        dbscan_eps: 0.3
+        dbscan_min_samples: 1
+        dbscan_confidence_threshold: 0.9
+        minimum_bounding_box_height: 4
+      }
+    }
+  }
+}

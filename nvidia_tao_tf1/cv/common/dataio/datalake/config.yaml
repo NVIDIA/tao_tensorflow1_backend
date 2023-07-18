@@ -1,0 +1,10 @@
+id_: 1
+train_size: 0.8
+kpi_users: ['RttjJvFIa5uMqEpo', 'Yhph6eFFqMNlTFdz', 'eiHMgz96t2aghrpE',
+            'SXNTShcZDXkMTlQw', 'TBoL0VVFiOoQDaij', 'XLHxPY6mfJo3HljN',
+            'QZWlhjajqK0w7K+O', 'ZCkKTxUyVE5GetqW', 'Ror+v2ZfjiyU+QZ2',
+            'ZdCDUUtTqyEnOipg', 'eTtdrj3DpiVhLeI1', 'VNNjz0bj+c8n2icX',
+            'eSWMnO_tNxHv8zWs', 'VjUmrvjU4GmphY8F', 'X+Dar7zpiR2knsdx',
+            'RvhvWJQGl779mHVE', 'bBN6ytcrGpVRBm2s', 'YqUa_FZw7SRpRH3Y',
+            'dpBLmnzI_I1e6jgV', 'Wwdq8840jcg3M9QW', 'cFO55aIgukyRikcX',
+            'YN9kP1a9gUowfcv4', 'YhTAYMz8cyidxMD8', 'RJrQz8rlcchxK0dE']

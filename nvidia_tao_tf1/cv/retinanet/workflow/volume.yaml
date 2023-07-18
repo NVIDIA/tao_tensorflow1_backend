@@ -1,0 +1,38 @@
+version: 2
+tasks:
+- name: volume-create
+  image: 726920260722.dkr.ecr.us-west-1.amazonaws.com/nucleus/pipelines/swifturl-to-volume:67de1025c14ce0f2c702139bac00eaae371e8a29@sha256:9a7f797c2c013b50e5120b1e8d20903e6eb5af76947e2f65a963431e80e78d18
+  args:
+  - --name
+  - iva-dataset
+  - --volumes.addr
+  - maglev.nvda.ai:443
+  - --volumes.authn.host
+  - maglev.nvda.ai/authn/v1
+  - --volumes.authn.service
+  - maglev
+  - --swift-url
+  - swift://swiftstack-maglev.ngc.nvidia.com/iva/iva-export/datasets/kitti_detection/
+  - --output-dir
+  - .vdisks
+  - --concurrency
+  - "1"
+  cache: disable
+  workerPool: cpupool
+  secrets:
+  - name: maglev-authn
+    keys:
+    - key: api-key
+      env: MAGLEV_API_KEY
+  - name: iva-swift-creds
+    keys:
+    - key: ACCESS_KEY_ID
+      env: SWIFT_ACCESS_KEY_ID
+    - key: SECRET_ACCESS_KEY
+      env: SWIFT_SECRET_ACCESS_KEY
+workerPools:
+- name: cpupool
+  workers: 1
+  cpu: "8"
+  gpu: "1"
+  mem: 128Gi

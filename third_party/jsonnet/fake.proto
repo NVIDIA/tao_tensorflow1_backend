@@ -1,0 +1,7 @@
+// Copyright (c) 2019, NVIDIA CORPORATION.  All rights reserved.
+
+syntax = "proto3";
+
+package third_party.jsonnet;
+
+message FakeMessage { string foo = 1; }

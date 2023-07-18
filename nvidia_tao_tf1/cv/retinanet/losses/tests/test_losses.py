@@ -1,0 +1,63 @@
+# Copyright (c) 2023, NVIDIA CORPORATION.  All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""test focal loss."""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import tensorflow as tf
+from nvidia_tao_tf1.cv.retinanet.losses.focal_loss import bce_focal_loss
+from nvidia_tao_tf1.cv.retinanet.losses.focal_loss import FocalLoss
+from nvidia_tao_tf1.cv.retinanet.losses.focal_loss import smooth_L1_loss
+
+
+def test_loss_zero():
+    focal_loss = FocalLoss(1.0, 0.25, 2.0)
+    y_true = [[[1.0, 1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.2, 0.2]]]
+    y_pred = [[[1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.2, 0.2]]]
+    with tf.Session() as sess:
+        assert abs(sess.run(focal_loss.compute_loss(tf.constant(y_true),
+                                                    tf.constant(y_pred)))[0]) < 1e-5
+
+
+def test_loss_non_zero_loc():
+    focal_loss = FocalLoss(1.0, 0.25, 2.0)
+    y_true = [[[1.0, 0, 1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.2, 0.2]]]
+    y_pred = [[[0, 1, 0, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.2, 0.2]]]
+    with tf.Session() as sess:
+        bce_loss = sess.run(bce_focal_loss(tf.constant(y_true)[:, :, 2:-12],
+                                           tf.constant(y_pred)[:, :, 1:-12], 0.25, 2.0))
+        loc_loss = sess.run(smooth_L1_loss(tf.constant(y_true)[:, :, -12:-8],
+                                           tf.constant(y_pred)[:, :, -12:-8]))
+        total_loss = sess.run(focal_loss.compute_loss(tf.constant(y_true), tf.constant(y_pred)))
+
+        assert abs(bce_loss[0]) < 1e-5
+        assert abs(total_loss[0] - loc_loss[0]) < 1e-5
+        assert abs(total_loss[0] - 0.00125) < 1e-5
+
+
+def test_loss_non_zero():
+    focal_loss = FocalLoss(1.0, 0.25, 2.0)
+    y_true = [[[1.0, 0, 1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.2, 0.2]]]
+    y_pred = [[[0, 0.3, 0, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.2, 0.2]]]
+    with tf.Session() as sess:
+        bce_loss = sess.run(bce_focal_loss(tf.constant(y_true)[:, :, 2:-12],
+                                           tf.constant(y_pred)[:, :, 1:-12], 0.25, 2.0))
+        loc_loss = sess.run(smooth_L1_loss(tf.constant(y_true)[:, :, -12:-8],
+                                           tf.constant(y_pred)[:, :, -12:-8]))
+        total_loss = sess.run(focal_loss.compute_loss(tf.constant(y_true), tf.constant(y_pred)))
+
+        assert abs(bce_loss[0] - 0.1474866) < 1e-5
+        assert abs(total_loss[0] - bce_loss[0] - loc_loss[0]) < 1e-5

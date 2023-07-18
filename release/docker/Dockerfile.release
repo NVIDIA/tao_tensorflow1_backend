@@ -1,0 +1,57 @@
+FROM nvcr.io/nvidia/tao/tao-toolkit:5.0.0-tf1.15.5-base
+
+# # Installing the TAO Toolkit source code packages.
+WORKDIR /opt/nvidia
+COPY dist/*.whl /opt/nvidia/wheels/
+RUN python -m pip install pip --upgrade \
+    && cd wheels && ls ./*.whl|xargs -I'{}' python -m pip install '{}' \
+    && rm *.whl
+
+RUN rm -rf /opt/nvidia/entrypoint.d/*.txt
+COPY release/docker/entrypoint.d/* /opt/nvidia/entrypoint.d/
+
+# Changes required from security scan updates.
+# Update apt-get packages.
+RUN apt-get update && apt-get install --only-upgrade libksba8 openssl libssl-dev -y
+
+# Update pip package
+RUN python -m pip install --upgrade joblib jupyter-core mpmath setuptools werkzeug grpcio
+# Removing graphviz since pip show shows no dependencies or requirements for it.
+# Output of `pip show graphviz`
+# Home-page: https://github.com/xflr6/graphviz
+# Location: /usr/local/lib/python3.8/dist-packages
+# Requires:
+# Required-by:
+RUN python -m pip uninstall graphviz -y
+
+# Updated Node
+ENV NVM_DIR=/usr/local/nvm
+RUN source "$NVM_DIR/nvm.sh" \
+    && nvm install 20.2.0 --reinstall-packages-from=16.15.1 node \
+    && nvm uninstall 16.15.1
+
+# Update openMPI version due to multiGPU issue in TF base container.
+WORKDIR /opt
+RUN wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.bz2 \
+    && mkdir src \
+    && mv openmpi-4.1.5.tar.bz2 src/ \
+    && cd src \
+    && tar -xjf openmpi-4.1.5.tar.bz2 \
+    && cd openmpi-4.1.5 \
+    && ./configure --prefix=/opt/openmpi \
+    && make -j128 all \
+    && make install \
+    && mpirun --version
+
+ENV PATH="/opt/nvidia/tools:/opt/openmpi/bin:$PATH"
+ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/openmpi/lib"
+ENV OPAL_PREFIX="/opt/openmpi"
+ENV OMPI_MCA_btl_vader_single_copy_mechanism="none"
+ENV NVIDIA_PRODUCT_NAME "TAO Toolkit"
+ENV TAO_TOOLKIT_VERSION="5.0.0"
+ENV NVIDIA_TAO_TOOLKIT_VERSION="${TAO_TOOLKIT_VERSION}-TF1"
+ENV TAO_TELEMETRY_SERVER="https://sqa-telemetry.metropolis.nvidia.com:443/api/v1/telemetry"
+
+WORKDIR /workspace
+
+CMD [ "/bin/bash" ]

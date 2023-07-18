@@ -1,0 +1,10 @@
+kitti_config {
+  root_directory_path: "/home/projects.dlar_artifacts/kitti_detection/training/"
+  image_dir_name: "image_2"
+  label_dir_name: "label_2"
+  partition_mode: "random"
+  val_split: 20
+  num_partitions: 2
+  num_shards: 10
+}
+image_directory_path: "/home/projects.dlar_artifacts/kitti_detection/training/"

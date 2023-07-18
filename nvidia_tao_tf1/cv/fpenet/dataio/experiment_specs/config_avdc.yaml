@@ -1,0 +1,10 @@
+sets: [s578-usercalibration-incar-0, s578-usercalibration-incar-1]
+gt_path: ''
+save_path: ''
+gt_root_path: '/home/gt_input/'
+save_root_path: '/home/tfrecord_output/'
+image_root_path: '/home/'
+tfrecord_folder: 'FpeTfRecords'
+tfrecord_name: 'data.tfrecords'
+num_keypoints: 80
+bbox_enlarge_ratio: 1.0

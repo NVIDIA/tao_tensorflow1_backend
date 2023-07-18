@@ -1,0 +1,51 @@
+# The default driveworks SDK checkout location
+third_party/driveworks_sdk/checkout
+
+# The jupyter notebook install folder
+dlav/common/jupyter_notebooks/jupyter_install
+
+docs_output
+
+# Temporary folders
+.DS_Store
+.ipynb_checkpoints
+*.swp
+*.tmp*
+*~
+/temp/
+/wheel/
+/patches/
+/tmp/
+TAGS
+/.mypy_cache/
+__pycache__
+
+# Compiled / optimized files
+*.py[cod]
+*.o
+/bazel-*
+*.so
+moduluspy/doc/source/API
+
+# Tests
+.coverage
+.cache
+/coverage/
+
+# Virtualenv
+/venv/
+.dazel_run*
+
+# Setuptools
+/build/
+/dist/
+*.egg-info/
+
+# Local IDE settings
+/.idea/
+/.vscode/
+
+# Weights and results
+*.hdf5
+*.h5
+/results/

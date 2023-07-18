@@ -1,0 +1,395 @@
+random_seed: 42
+yolov3_config {
+  big_anchor_shape: "[(114.94, 60.67), (159.06, 114.59), (297.59, 176.38)]"
+  mid_anchor_shape: "[(42.99, 31.91), (79.57, 31.75), (56.80, 56.93)]"
+  small_anchor_shape: "[(15.60, 13.88), (30.25, 20.25), (20.67, 49.63)]"
+  matching_neutral_box_iou: 0.7
+  arch: "resnet"
+  nlayers: 18
+  arch_conv_blocks: 2
+  loss_loc_weight: 0.8
+  loss_neg_obj_weights: 100.0
+  loss_class_weights: 1.0
+  freeze_bn: false
+  #freeze_blocks: 0
+  force_relu: false
+}
+training_config {
+  batch_size_per_gpu: 8
+  num_epochs: 80
+  enable_qat: false
+  checkpoint_interval: 10
+  learning_rate {
+  soft_start_annealing_schedule {
+    min_learning_rate: 1e-6
+    max_learning_rate: 1e-4
+    soft_start: 0.1
+    annealing: 0.5
+    }
+  }
+  regularizer {
+    type: L1
+    weight: 3e-5
+  }
+  optimizer {
+    adam {
+      epsilon: 1e-7
+      beta1: 0.9
+      beta2: 0.999
+      amsgrad: false
+    }
+  }
+}
+eval_config {
+  average_precision_mode: SAMPLE
+  batch_size: 8
+  matching_iou_threshold: 0.5
+}
+nms_config {
+  confidence_threshold: 0.001
+  clustering_iou_threshold: 0.5
+  top_k: 200
+  force_on_cpu: True
+}
+augmentation_config {
+  hue: 0.1
+  saturation: 1.5
+  exposure:1.5
+  vertical_flip:0
+  horizontal_flip: 0.5
+  jitter: 0.3
+  output_width: 1248
+  output_height: 384
+  output_channel: 3
+  randomize_input_shape_period: 0
+}
+dataset_config {
+  data_sources: {
+    tfrecords_path: "/home/projects1_metropolis/tmp/sean/tf1/coco_tfrecord_yolov3/coco-fold-00*"
+    image_directory_path: "/home/scratch.metropolis3/yuw/datasets/coco/raw-data/"
+  }
+  type: "coco"
+  include_difficult_in_training: true
+  validation_fold: 0
+  image_extension: "jpg"
+  target_class_mapping {
+    key: "person"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "bicycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "car"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "motorcycle"
+    value: "motorcycle"
+  }
+  target_class_mapping {
+    key: "airplane"
+    value: "airplane"
+  }
+  target_class_mapping {
+    key: "bus"
+    value: "bus"
+  }
+  target_class_mapping {
+    key: "train"
+    value: "train"
+  }
+  target_class_mapping {
+    key: "truck"
+    value: "truck"
+  }
+  target_class_mapping {
+    key: "boat"
+    value: "boat"
+  }
+  target_class_mapping {
+    key: "traffic light"
+    value: "traffic light"
+  }
+  target_class_mapping {
+    key: "fire hydrant"
+    value: "fire hydrant"
+  }
+  target_class_mapping {
+    key: "stop sign"
+    value: "stop sign"
+  }
+  target_class_mapping {
+    key: "parking meter"
+    value: "parking meter"
+  }
+  target_class_mapping {
+    key: "bench"
+    value: "bench"
+  }
+  target_class_mapping {
+    key: "bird"
+    value: "bird"
+  }
+  target_class_mapping {
+    key: "cat"
+    value: "cat"
+  }
+  target_class_mapping {
+    key: "dog"
+    value: "dog"
+  }
+  target_class_mapping {
+    key: "horse"
+    value: "horse"
+  }
+  target_class_mapping {
+    key: "sheep"
+    value: "sheep"
+  }
+  target_class_mapping {
+    key: "cow"
+    value: "cow"
+  }
+  target_class_mapping {
+    key: "elephant"
+    value: "elephant"
+  }
+  target_class_mapping {
+    key: "bear"
+    value: "bear"
+  }
+  target_class_mapping {
+    key: "zebra"
+    value: "zebra"
+  }
+  target_class_mapping {
+    key: "giraffe"
+    value: "giraffe"
+  }
+  target_class_mapping {
+    key: "backpack"
+    value: "backpack"
+  }
+  target_class_mapping {
+    key: "umbrella"
+    value: "umbrella"
+  }
+  target_class_mapping {
+    key: "handbag"
+    value: "handbag"
+  }
+  target_class_mapping {
+    key: "tie"
+    value: "tie"
+  }
+  target_class_mapping {
+    key: "suitcase"
+    value: "suitcase"
+  }
+  target_class_mapping {
+    key: "frisbee"
+    value: "frisbee"
+  }
+  target_class_mapping {
+    key: "skis"
+    value: "skis"
+  }
+  target_class_mapping {
+    key: "snowboard"
+    value: "snowboard"
+  }
+  target_class_mapping {
+    key: "sports ball"
+    value: "sports ball"
+  }
+  target_class_mapping {
+    key: "kite"
+    value: "kite"
+  }
+  target_class_mapping {
+    key: "baseball bat"
+    value: "baseball bat"
+  }
+  target_class_mapping {
+    key: "baseball glove"
+    value: "baseball glove"
+  }
+  target_class_mapping {
+    key: "skateboard"
+    value: "skateboard"
+  }
+  target_class_mapping {
+    key: "surfboard"
+    value: "surfboard"
+  }
+  target_class_mapping {
+    key: "tennis racket"
+    value: "tennis racket"
+  }
+  target_class_mapping {
+    key: "bottle"
+    value: "bottle"
+  }
+  target_class_mapping {
+    key: "wine glass"
+    value: "wine glass"
+  }
+  target_class_mapping {
+    key: "cup"
+    value: "cup"
+  }
+  target_class_mapping {
+    key: "fork"
+    value: "fork"
+  }
+  target_class_mapping {
+    key: "knife"
+    value: "knife"
+  }
+  target_class_mapping {
+    key: "spoon"
+    value: "spoon"
+  }
+  target_class_mapping {
+    key: "bowl"
+    value: "bowl"
+  }
+  target_class_mapping {
+    key: "banana"
+    value: "banana"
+  }
+  target_class_mapping {
+    key: "apple"
+    value: "apple"
+  }
+  target_class_mapping {
+    key: "sandwich"
+    value: "sandwich"
+  }
+  target_class_mapping {
+    key: "orange"
+    value: "orange"
+  }
+  target_class_mapping {
+    key: "broccoli"
+    value: "broccoli"
+  }
+  target_class_mapping {
+    key: "carrot"
+    value: "carrot"
+  }
+  target_class_mapping {
+    key: "hot dog"
+    value: "hot dog"
+  }
+  target_class_mapping {
+    key: "pizza"
+    value: "pizza"
+  }
+  target_class_mapping {
+    key: "donut"
+    value: "donut"
+  }
+  target_class_mapping {
+    key: "cake"
+    value: "cake"
+  }
+  target_class_mapping {
+    key: "chair"
+    value: "chair"
+  }
+  target_class_mapping {
+    key: "couch"
+    value: "couch"
+  }
+  target_class_mapping {
+    key: "potted plant"
+    value: "potted plant"
+  }
+  target_class_mapping {
+    key: "bed"
+    value: "bed"
+  }
+  target_class_mapping {
+    key: "dining table"
+    value: "dining table"
+  }
+  target_class_mapping {
+    key: "toilet"
+    value: "toilet"
+  }
+  target_class_mapping {
+    key: "tv"
+    value: "tv"
+  }
+  target_class_mapping {
+    key: "laptop"
+    value: "laptop"
+  }
+  target_class_mapping {
+    key: "mouse"
+    value: "mouse"
+  }
+  target_class_mapping {
+    key: "remote"
+    value: "remote"
+  }
+  target_class_mapping {
+    key: "keyboard"
+    value: "keyboard"
+  }
+  target_class_mapping {
+    key: "cell phone"
+    value: "cell phone"
+  }
+  target_class_mapping {
+    key: "microwave"
+    value: "microwave"
+  }
+  target_class_mapping {
+    key: "oven"
+    value: "oven"
+  }
+  target_class_mapping {
+    key: "toaster"
+    value: "toaster"
+  }
+  target_class_mapping {
+    key: "sink"
+    value: "sink"
+  }
+  target_class_mapping {
+    key: "refrigerator"
+    value: "refrigerator"
+  }
+  target_class_mapping {
+    key: "book"
+    value: "book"
+  }
+  target_class_mapping {
+    key: "clock"
+    value: "clock"
+  }
+  target_class_mapping {
+    key: "vase"
+    value: "vase"
+  }
+  target_class_mapping {
+    key: "scissors"
+    value: "scissors"
+  }
+  target_class_mapping {
+    key: "teddy bear"
+    value: "teddy bear"
+  }
+  target_class_mapping {
+    key: "hair drier"
+    value: "hair drier"
+  }
+  target_class_mapping {
+    key: "toothbrush"
+    value: "toothbrush"
+  }
+}

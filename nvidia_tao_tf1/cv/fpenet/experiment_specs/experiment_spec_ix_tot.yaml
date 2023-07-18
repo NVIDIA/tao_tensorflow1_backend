@@ -1,0 +1,192 @@
+__class_name__: FpeNetTrainer
+checkpoint_dir: /home/driveix.cosmos639/shagan/fpenet/experiments_usb/temp/
+checkpoint_n_epoch: 1
+dataloader:
+  __class_name__: FpeNetDataloader
+  augmentation_info:
+    augmentation_resize_probability: 0.5
+    augmentation_resize_scale: 1.6
+    enable_occlusion_augmentation: true
+    enable_online_augmentation: true
+    enable_resize_augmentation: true
+    gamma_augmentation:
+      gamma_max: 1.6
+      gamma_min: 0.6
+      gamma_probability: 0.1
+      gamma_type: uniform
+    modulus_spatial_augmentation:
+      hflip_probability: 0.25
+      rotate_rad_max: 0.35
+      translate_max_x: 10
+      translate_max_y: 10
+      zoom_max: 1.2
+      zoom_min: 0.8
+    patch_probability: 0.5
+    size_to_image_ratio: 0.5
+    mask_augmentation_patch: true
+  batch_size: 64
+  dataset_info:
+    image_extension: png
+    no_occlusion_masking_sets: s481-gaze-1 s481-gaze-2 s481-gaze-3 s481-gaze-4 s481-gaze-5
+      s481-gaze-6 s481-gaze-7 s481-gaze-8 s482-gaze-1 s482-gaze-2 s482-gaze-3 s482-gaze-4
+      s482-gaze-5 s482-gaze-6 s482-gaze-7 s482-gaze-8 s485-gaze-1 s485-gaze-2 s485-gaze-3
+      s485-gaze-4 s485-gaze-5 s485-gaze-6 s485-gaze-7 s485-gaze-8 s487-gaze-1 s487-gaze-2
+      s487-gaze-3 s487-gaze-4 s487-gaze-5 s487-gaze-6 s487-gaze-7 s487-gaze-8 s500-gaze-1
+      s500-gaze-2 s500-gaze-3 s500-gaze-4 s500-gaze-5 s500-gaze-6 s500-gaze-7 s500-gaze-8
+      s502-gaze-1 s502-gaze-2 s502-gaze-3 s502-gaze-4 s502-gaze-5 s502-gaze-6 s502-gaze-7
+      s502-gaze-8 s542-gaze-0 s542-gaze-1 s542-gaze-2 s542-gaze-3 s542-gaze-4 s542-gaze-5
+      s542-gaze-6 s542-gaze-7 s544-gaze-0 s544-gaze-1 s544-gaze-2 s544-gaze-3 s544-gaze-4
+      s544-gaze-5 s544-gaze-6 s544-gaze-7 s498-gaze-0 s498-gaze-1 s498-gaze-2 s498-gaze-3
+      s498-gaze-4 s498-gaze-5 s498-gaze-6 s498-gaze-7 s501-gaze-0 s501-gaze-1 s501-gaze-2
+      s501-gaze-3 s501-gaze-4 s501-gaze-5 s501-gaze-6 s501-gaze-7 s503-gaze-0 s503-gaze-1
+      s503-gaze-2 s503-gaze-3 s503-gaze-4 s503-gaze-5 s503-gaze-6 s503-gaze-7 s513-gaze-0
+      s513-gaze-1 s513-gaze-2 s513-gaze-3 s513-gaze-4 s513-gaze-5 s513-gaze-6 s513-gaze-7
+      s514-gaze-0 s514-gaze-1 s514-gaze-2 s514-gaze-3 s514-gaze-4 s514-gaze-5 s514-gaze-6
+      s514-gaze-7 s515-gaze-0 s515-gaze-1 s515-gaze-2 s515-gaze-3 s515-gaze-4 s515-gaze-5
+      s515-gaze-6 s515-gaze-7 s572-gaze-incar-0 s572-gaze-incar-1 s572-gaze-incar-2
+      s572-gaze-incar-3 s570-gaze-incar-kpi-0 s563-gaze-incar-kpi-0 s563-gaze-incar-kpi-1
+      s563-gaze-incar-kpi-2 s563-gaze-incar-kpi-3 s558-gaze-incar-kpi-0 s558-gaze-incar-kpi-1
+      s558-gaze-incar-kpi-3 s2-syn s2-syn-kpi s3-syn s3-syn-kpi s4-syn s5-syn s6-syn
+      s7-syn s8-syn s9-syn-kpi s10-syn s11-syn s12-syn-kpi s572-gaze-incar-0_reg s572-gaze-incar-1_reg s572-gaze-incar-2_reg s572-gaze-incar-3_reg s563-gaze-incar-kpi-0_reg s563-gaze-incar-kpi-1_reg
+      s563-gaze-incar-kpi-2_reg s563-gaze-incar-kpi-3_reg s558-gaze-incar-kpi-0_reg
+      s558-gaze-incar-kpi-1_reg s558-gaze-incar-kpi-3_reg s570-gaze-incar-kpi-0_reg
+      s558-gaze-incar-kpi-3_reg s570-gaze-incar-kpi-0_reg s573-gaze-incar-0 s573-gaze-incar-1
+      s573-gaze-incar-2 s573-gaze-incar-3 s573-gaze-incar-0_reg s573-gaze-incar-1_reg
+      s573-gaze-incar-2_reg s573-gaze-incar-3_reg s575-gaze-incar-0 s575-gaze-incar-1
+      s575-gaze-incar-2 s575-gaze-incar-3 s575-gaze-incar-0_reg s575-gaze-incar-1_reg
+      s575-gaze-incar-2_reg s575-gaze-incar-3_reg s467-hp-1 s468-hp-1
+    root_path: null
+    test_file_name: data.tfrecords
+    tfrecord_folder_name: FpeTfRecords_80points_att
+    tfrecords_directory_path: /home/driveix.cosmos639/shagan/fpenet/tfrecords/101819
+    tfrecords_set_id_train: s432-gaze-1 s432-gaze-2 s432-gaze-3 s432-gaze-4 s432-gaze-5
+      s432-gaze-6 s434-gaze-1 s434-gaze-2 s434-gaze-3 s434-gaze-4 s434-gaze-5 s434-gaze-6
+      s438-gaze-1 s438-gaze-2 s438-gaze-3 s438-gaze-4 s438-gaze-5 s438-gaze-6 s439-gaze-1
+      s439-gaze-2 s439-gaze-3 s439-gaze-4 s439-gaze-5 s439-gaze-6 s440-gaze-1 s440-gaze-2
+      s440-gaze-3 s440-gaze-4 s440-gaze-5 s440-gaze-6 s454-gaze-1 s454-gaze-2 s454-gaze-3
+      s454-gaze-4 s454-gaze-5 s454-gaze-6 germany-0-gaze-1 germany-0-gaze-2 germany-0-gaze-3
+      germany-0-gaze-4 germany-1-gaze-1 germany-1-gaze-2 germany-1-gaze-3 germany-1-gaze-4
+      germany-2-gaze-1 germany-2-gaze-2 germany-2-gaze-3 germany-2-gaze-4 germany-3-gaze-1
+      germany-3-gaze-2 germany-3-gaze-3 germany-3-gaze-4 s458-gaze-1 s458-gaze-2 s458-gaze-3
+      s458-gaze-4 s458-gaze-5 s458-gaze-6 s459-gaze-1 s459-gaze-2 s459-gaze-3 s459-gaze-4
+      s459-gaze-5 s459-gaze-6 s451-gaze-1 s451-gaze-2 s451-gaze-3 s453-gaze-1 s453-gaze-2
+      s453-gaze-3 s453-gaze-4 s453-gaze-5 s453-gaze-6 s431-eoc-1 s431-eoc-2 s431-eoc-3
+      s431-eoc-4 s431-eoc-5 s431-eoc-6 s432-eoc-1 s432-eoc-2 s432-eoc-3 s432-eoc-4
+      s432-eoc-5 s432-eoc-6 s433-eoc-1 s433-eoc-2 s433-eoc-3 s433-eoc-4 s433-eoc-5
+      s433-eoc-6 s434-eoc-1 s434-eoc-2 s434-eoc-3 s434-eoc-4 s434-eoc-5 s434-eoc-6
+      s221 s222 s223 s224 s227 s228 s229 s230 s305 s306 s405-ar0144-1 s405-ar0144-2
+      s405-ar0144-3 s405-ar0144-4 s405-ar0144-5 s405-ar0144-6 s405-ar0144-7 s403-ar0144-4
+      s403-ar0144-7 s310 s313 s314 s315 s316 s318 s319 s320 s323 s324 s325 s326 s328
+      s329 s330 s333 s334 s336 s338 s339 s340 s343 s344 s345 s346 s348 s349 s350 s354
+      s355 s356 s358 s359 s360 s383 s332_hp s337_hp s342_hp s362_hp s382_hp s347_hp
+      s367_hp s467-hp-1 s468-hp-1 s481-gaze-1 s481-gaze-2 s481-gaze-3 s481-gaze-4
+      s481-gaze-5 s481-gaze-6 s481-gaze-7 s481-gaze-8 s482-gaze-1 s482-gaze-2 s482-gaze-3
+      s482-gaze-4 s482-gaze-5 s482-gaze-6 s482-gaze-7 s482-gaze-8 s485-gaze-1 s485-gaze-2
+      s485-gaze-3 s485-gaze-4 s485-gaze-5 s485-gaze-6 s485-gaze-7 s485-gaze-8 s487-gaze-1
+      s487-gaze-2 s487-gaze-3 s487-gaze-4 s487-gaze-5 s487-gaze-6 s487-gaze-7 s487-gaze-8
+      s500-gaze-1 s500-gaze-2 s500-gaze-4 s500-gaze-5 s500-gaze-6 s500-gaze-7 s500-gaze-8
+      s502-gaze-1 s502-gaze-2 s502-gaze-3 s502-gaze-5 s502-gaze-6 s502-gaze-7 s502-gaze-8
+      s542-gaze-0 s542-gaze-1 s542-gaze-2 s542-gaze-3 s542-gaze-4 s542-gaze-5 s542-gaze-6
+      s542-gaze-7 s544-gaze-0 s544-gaze-1 s544-gaze-2 s544-gaze-3 s544-gaze-4 s544-gaze-5
+      s544-gaze-6 s544-gaze-7 s498-gaze-0 s498-gaze-1 s498-gaze-2 s498-gaze-3 s498-gaze-4
+      s498-gaze-5 s498-gaze-6 s498-gaze-7 s501-gaze-0 s501-gaze-1 s501-gaze-2 s501-gaze-3
+      s501-gaze-4 s501-gaze-5 s501-gaze-6 s501-gaze-7 s503-gaze-0 s503-gaze-1 s503-gaze-2
+      s503-gaze-3 s503-gaze-4 s503-gaze-5 s503-gaze-6 s503-gaze-7 germany-right-1-gaze-1
+      germany-right-1-gaze-2 germany-right-1-gaze-3 germany-right-1-gaze-4 germany-right-1-gaze-5
+      germany-right-2-gaze-1 germany-right-2-gaze-2 germany-right-2-gaze-3 germany-right-2-gaze-4
+      germany-right-2-gaze-5 germany-right-3-gaze-1 germany-right-3-gaze-2 germany-right-3-gaze-3
+      germany-right-3-gaze-4 germany-right-3-gaze-5 sclimate2-gaze-1 sclimate2-gaze-2
+      sclimate2-gaze-3 sclimate2-gaze-4 s442-gaze-1 s442-gaze-2 s442-gaze-3 s442-gaze-4
+      s442-gaze-5 s442-gaze-6 s443-gaze-1 s443-gaze-2 s443-gaze-3 s443-gaze-4 s443-gaze-5
+      s443-gaze-6 s433-gaze-1 s433-gaze-2 s433-gaze-3 s433-gaze-4 s433-gaze-5 s433-gaze-6
+      s435-gaze-1 s435-gaze-2 s435-gaze-3 s435-gaze-4 s435-gaze-6 s437-gaze-1 s437-gaze-2
+      s437-gaze-3 s437-gaze-4 s437-gaze-5 s437-gaze-6 s461-gaze-1 s461-gaze-2 s461-gaze-3
+      s461-gaze-4 s461-gaze-5 s461-gaze-6 s462-gaze-1 s462-gaze-2 s462-gaze-3 s462-gaze-4
+      s463-gaze-1 s463-gaze-2 s463-gaze-3 s463-gaze-4 s466-gaze-1 s466-gaze-2 s466-gaze-3
+      s466-gaze-4 s467-gaze-1 s467-gaze-2 s467-gaze-3 s467-gaze-4 s572-gaze-incar-0
+      s572-gaze-incar-1 s572-gaze-incar-2 s572-gaze-incar-0 s572-gaze-incar-1 s572-gaze-incar-2
+      s572-gaze-incar-0 s572-gaze-incar-1 s572-gaze-incar-2 s572-gaze-incar-0 s572-gaze-incar-1
+      s572-gaze-incar-2 s572-gaze-incar-0 s572-gaze-incar-1 s572-gaze-incar-2 s563-gaze-incar-kpi-0
+      s563-gaze-incar-kpi-1 s563-gaze-incar-kpi-2 s563-gaze-incar-kpi-3 s558-gaze-incar-kpi-0
+      s558-gaze-incar-kpi-1 s558-gaze-incar-kpi-3 s563-gaze-incar-kpi-0 s563-gaze-incar-kpi-1
+      s563-gaze-incar-kpi-2 s563-gaze-incar-kpi-3 s558-gaze-incar-kpi-0 s558-gaze-incar-kpi-1
+      s558-gaze-incar-kpi-3 s467-hp-1 s468-hp-1 s573-gaze-incar-0 s573-gaze-incar-2
+      s573-gaze-incar-3 s573-gaze-incar-0 s573-gaze-incar-2 s573-gaze-incar-3 s573-gaze-incar-0
+      s573-gaze-incar-2 s573-gaze-incar-3
+    tfrecords_set_id_val: s452-gaze-1 s452-gaze-2 s452-gaze-3 s455-gaze-1 s455-gaze-2
+      s455-gaze-3 s455-gaze-4 s455-gaze-5 s455-gaze-6 germany-4-gaze-1 germany-4-gaze-2
+      germany-4-gaze-3 germany-4-gaze-4 s460-gaze-1 s460-gaze-2 s460-gaze-3 s460-gaze-4
+      s460-gaze-5 s460-gaze-6 s435-eoc-1 s435-eoc-2 s435-eoc-3 s435-eoc-4 s435-eoc-5
+      s435-eoc-6 s308 s309 s406-ar0144-1 s406-ar0144-2 s406-ar0144-3 s406-ar0144-4
+      s406-ar0144-5 s406-ar0144-6 s406-ar0144-7 s384 s385 s388 s389 s372_hp s387_hp
+      s513-gaze-0 s513-gaze-1 s513-gaze-2 s513-gaze-3 s513-gaze-4 s513-gaze-5 s513-gaze-6
+      s513-gaze-7 s514-gaze-0 s514-gaze-1 s514-gaze-2 s514-gaze-3 s514-gaze-4 s514-gaze-5
+      s514-gaze-6 s514-gaze-7 s468-gaze-1 s468-gaze-2 s468-gaze-3 s468-gaze-4 s469-gaze-1
+      s469-gaze-2 s469-gaze-3 s469-gaze-4 s470-gaze-1 s470-gaze-2 s470-gaze-3 s470-gaze-4
+      germany-right-5-gaze-1 germany-right-5-gaze-2 germany-right-5-gaze-3 germany-right-5-gaze-4
+      germany-right-5-gaze-5 sclimate3-gaze-1 sclimate3-gaze-2 sclimate3-gaze-3 sclimate3-gaze-4
+      s572-gaze-incar-3 s572-gaze-incar-3 s572-gaze-incar-3 s570-gaze-incar-kpi-0
+      s573-gaze-incar-1 s573-gaze-incar-1 s573-gaze-incar-1
+    tfrecord_file_name: data.tfrecords
+    use_extra_dataset: false
+  image_info:
+    image:
+      channel: 1
+      height: 80
+      width: 80
+  kpiset_info:
+    tfrecords_set_id_kpi: s427-gaze-1 s427-gaze-2 s427-gaze-3 s427-gaze-4 s427-gaze-5
+      s427-gaze-6 s428-gaze-1 s428-gaze-2 s428-gaze-3 s428-gaze-4 s428-gaze-5 s428-gaze-6
+      s428-gaze-7 s428-gaze-8 s429-gaze-2 s429-gaze-3 s429-gaze-4 s429-gaze-5 s429-gaze-6
+      s429-gaze-7 s430-gaze-1 s430-gaze-2 s430-gaze-3 s430-gaze-4 s430-gaze-5 s430-gaze-6
+  num_keypoints: 80
+enable_visualization: true
+hooks: null
+infrequent_summary_every_n_steps: 0
+log_every_n_secs: 10
+loss:
+  __class_name__: FpeLoss
+  kpts_coeff: 0.01
+  loss_type: wing_loss
+  mask_occ: true
+  weights_dict: null
+  elt_loss_info:
+    elt_alpha: 0.5
+    enable_elt_loss: true
+    modulus_spatial_augmentation:
+      hflip_probability: 0.0
+      rotate_rad_max: 0.35
+      translate_max_x: 10
+      translate_max_y: 10
+      zoom_max: 1.2
+      zoom_min: 0.8
+model:
+  __class_name__: FpeNetBaseModel
+  model_parameters:
+    beta: 0.01
+    dropout_rate: 0.5
+    freeze_Convlayer: null
+    pretrained_model_path: null
+    regularizer_type: l2
+    regularizer_weight: 1.0e-05
+    train_fpe_model: true
+    type: FpeNet_base
+    use_less_face_layers: false
+    use_upsampling_layer: false
+  visualization_parameters: null
+num_epoch: 40
+num_keypoints: 80
+optimizer:
+  __class_name__: AdamOptimizer
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 1.0e-08
+  learning_rate_schedule:
+    __class_name__: SoftstartAnnealingLearningRateSchedule
+    annealing: 0.5
+    base_learning_rate: 0.0005
+    last_step: 1000000
+    min_learning_rate: 1.0e-07
+    soft_start: 0.3
+random_seed: 35
+visualize_num_images: 3

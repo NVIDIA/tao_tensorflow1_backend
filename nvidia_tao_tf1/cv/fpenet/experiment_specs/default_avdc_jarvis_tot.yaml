@@ -1,0 +1,268 @@
+__class_name__: FpeNetTrainer
+checkpoint_dir: /home/driveix.cosmos639/shagan/fpenet/temp/
+checkpoint_n_epoch: 1
+dataloader:
+  __class_name__: FpeNetDataloader
+  augmentation_info:
+    augmentation_resize_probability: 0.5
+    augmentation_resize_scale: 1.6
+    enable_occlusion_augmentation: true
+    enable_online_augmentation: true
+    enable_resize_augmentation: true
+    gamma_augmentation:
+      gamma_max: 1.6
+      gamma_min: 0.6
+      gamma_probability: 0.1
+      gamma_type: uniform
+    modulus_spatial_augmentation:
+      hflip_probability: 0.25
+      rotate_rad_max: 0.35
+      translate_max_x: 10
+      translate_max_y: 10
+      zoom_max: 1.2
+      zoom_min: 0.8
+    patch_probability: 0.5
+    size_to_image_ratio: 0.5
+    mask_augmentation_patch: true
+  batch_size: 64
+  dataset_info:
+    image_extension: png
+    no_occlusion_masking_sets: s30-new-gray s31-new s32-new-gray s40-new-gray s41-new
+      s578-usercalibration-incar-0 s578-usercalibration-incar-1
+      s469-hp-1 s471-hp-1 s467-hp-1 s468-hp-1 s470-hp-1
+      s9-fl-bench-0 s6-fl-bench-0 s169-faciallandmarks-incar-kpi-car22-0 s169-faciallandmarks-incar-kpi-car22-1 s169-faciallandmarks-incar-kpi-car22-2
+      s481-gaze-1 s481-gaze-2 s481-gaze-3 s481-gaze-4 s481-gaze-5 s481-gaze-6 s481-gaze-7 s481-gaze-8
+      s482-gaze-1 s482-gaze-2 s482-gaze-3 s482-gaze-4 s482-gaze-5 s482-gaze-6 s482-gaze-7 s482-gaze-8
+      s485-gaze-1 s485-gaze-2 s485-gaze-3 s485-gaze-4 s485-gaze-5 s485-gaze-6 s485-gaze-7 s485-gaze-8
+      s498-gaze-0 s498-gaze-1 s498-gaze-2 s498-gaze-3 s498-gaze-4 s498-gaze-5 s498-gaze-6 s498-gaze-7
+      s500-gaze-1 s500-gaze-2 s500-gaze-3 s500-gaze-4 s500-gaze-5 s500-gaze-6 s500-gaze-7 s500-gaze-8
+      s502-gaze-1 s502-gaze-2 s502-gaze-3 s502-gaze-4 s502-gaze-5 s502-gaze-6 s502-gaze-7 s502-gaze-8
+      s513-gaze-0 s513-gaze-1 s513-gaze-2 s513-gaze-3 s513-gaze-4 s513-gaze-5 s513-gaze-6 s513-gaze-7
+      s542-gaze-0 s542-gaze-1 s542-gaze-2 s542-gaze-3 s542-gaze-4 s542-gaze-5 s542-gaze-6 s542-gaze-7
+      s544-gaze-0 s544-gaze-1 s544-gaze-2 s544-gaze-3 s544-gaze-4 s544-gaze-5 s544-gaze-6 s544-gaze-7
+      s583-gaze-incar-lincoln-car22-0
+      s601-gaze-incar-kpi-car22-0 s601-gaze-incar-kpi-car22-1 s601-gaze-incar-kpi-car22-2
+      s577-gaze-incar-lincoln-car22-kpi-0 s577-gaze-incar-lincoln-car22-kpi-1 s577-gaze-incar-lincoln-car22-kpi-2 s577-gaze-incar-lincoln-car22-kpi-3
+      s563-gaze-incar-kpi-0 s563-gaze-incar-kpi-1 s563-gaze-incar-kpi-2 s563-gaze-incar-kpi-3
+      s558-gaze-incar-kpi-0 s558-gaze-incar-kpi-1 s558-gaze-incar-kpi-3
+      s578-gaze-incar-lincoln-car22-kpi-0 s578-gaze-incar-lincoln-car22-kpi-1 s578-gaze-incar-lincoln-car22-kpi-2 s578-gaze-incar-lincoln-car22-kpi-3
+      s579-gaze-incar-lincoln-car22-0 s579-gaze-incar-lincoln-car22-1 s579-gaze-incar-lincoln-car22-3
+      s582-gaze-incar-lincoln-car22-0 s582-gaze-incar-lincoln-car22-1 s582-gaze-incar-lincoln-car22-3
+      s478-gaze-kpi-1 s478-gaze-kpi-2 s478-gaze-kpi-3 s478-gaze-kpi-4 s478-gaze-kpi-5 s478-gaze-kpi-6 s478-gaze-kpi-7 s478-gaze-kpi-8
+      s487-gaze-1 s487-gaze-2 s487-gaze-3 s487-gaze-4 s487-gaze-5 s487-gaze-6 s487-gaze-7 s487-gaze-8
+      s501-gaze-0 s501-gaze-1 s501-gaze-2 s501-gaze-3 s501-gaze-4 s501-gaze-5 s501-gaze-6 s501-gaze-7
+      s503-gaze-0 s503-gaze-1 s503-gaze-2 s503-gaze-3 s503-gaze-4 s503-gaze-5 s503-gaze-6 s503-gaze-7
+      s514-gaze-0 s514-gaze-1 s514-gaze-2 s514-gaze-3 s514-gaze-4 s514-gaze-5 s514-gaze-6 s514-gaze-7
+      s585-gaze-incar-lincoln-car22-0 s585-gaze-incar-lincoln-car22-1 s585-gaze-incar-lincoln-car22-2 s585-gaze-incar-lincoln-car22-3
+      s570-gaze-incar-kpi-0
+      s586-gaze-incar-lincoln-car22-0
+      s584-gaze-incar-lincoln-car22-0 s584-gaze-incar-lincoln-car22-1
+      s572-gaze-incar-0 s572-gaze-incar-1 s572-gaze-incar-2 s572-gaze-incar-3
+      s573-gaze-incar-0 s573-gaze-incar-1 s573-gaze-incar-2 s573-gaze-incar-3
+      s575-gaze-incar-0 s575-gaze-incar-1 s575-gaze-incar-2 s575-gaze-incar-3
+      multipie
+    root_path: /home/
+    test_file_name: data.tfrecords
+    tfrecord_folder_name: FpeTfRecords
+    tfrecords_directory_path: /home/gt_input/tfrecords
+    tfrecords_set_id_train: germany-0-eoc-1 germany-0-eoc-2 germany-0-eoc-3 germany-0-eoc-4
+      germany-1-eoc-1 germany-1-eoc-2 germany-1-eoc-3 germany-1-eoc-4
+      germany-2-eoc-1 germany-2-eoc-2 germany-2-eoc-3 germany-2-eoc-4
+      s431-eoc-1 s431-eoc-2 s431-eoc-3 s431-eoc-4 s431-eoc-5 s431-eoc-6
+      s432-eoc-1 s432-eoc-2 s432-eoc-3 s432-eoc-4 s432-eoc-5 s432-eoc-6
+      s433-eoc-1 s433-eoc-2 s433-eoc-3 s433-eoc-4 s433-eoc-5 s433-eoc-6
+      s434-eoc-1 s434-eoc-2 s434-eoc-3 s434-eoc-4 s434-eoc-5 s434-eoc-6
+      germany-0-gaze-1 germany-0-gaze-2 germany-0-gaze-3 germany-0-gaze-4
+      germany-1-gaze-1 germany-1-gaze-2 germany-1-gaze-3 germany-1-gaze-4
+      germany-2-gaze-1 germany-2-gaze-2 germany-2-gaze-3 germany-2-gaze-4
+      germany-3-gaze-1 germany-3-gaze-2 germany-3-gaze-3 germany-3-gaze-4
+      germany-right-1-gaze-1 germany-right-1-gaze-2 germany-right-1-gaze-3 germany-right-1-gaze-4 germany-right-1-gaze-5
+      germany-right-2-gaze-1 germany-right-2-gaze-2 germany-right-2-gaze-3 germany-right-2-gaze-4 germany-right-2-gaze-5
+      germany-right-3-gaze-1 germany-right-3-gaze-2 germany-right-3-gaze-3 germany-right-3-gaze-4 germany-right-3-gaze-5
+      s428-eoc_KPI-1 s428-eoc_KPI-2 s428-eoc_KPI-3 s428-eoc_KPI-4 s428-eoc_KPI-5 s428-eoc_KPI-6 s428-eoc_KPI-7 s428-eoc_KPI-8
+      s221 s222 s223 s224 s227 s228 s229 s230 s305 s306 s308 s309 s310 s313 s314 s315 s316 s318 s319 s320 s323 s324 s325 s326 s328 s329 s330 s333 s334 s336 s338 s339 s340 s343 s344 s345 s346 s348 s349 s350 s354 s355 s356 
+      s337_hp s332_hp s342_hp s347_hp s352_hp s357_hp s362_hp s367_hp
+      s467-hp-1 s468-hp-1 s470-hp-1 
+      s403-ar0144-4 s403-ar0144-7 s405-ar0144-1 s405-ar0144-2 s405-ar0144-3 s405-ar0144-4 s405-ar0144-5 s405-ar0144-6 s405-ar0144-7
+      sclimate2-gaze-1 sclimate2-gaze-2 sclimate2-gaze-3 sclimate2-gaze-4
+      s578-usercalibration-incar-0 s578-usercalibration-incar-1
+      s9-fl-bench-0 s6-fl-bench-0
+      s17-new-gray s28-new-gray s30-new-gray s31-new s32-new-gray s7-new s8-new-gray
+      s432-gaze-1 s432-gaze-2 s432-gaze-3 s432-gaze-4 s432-gaze-5 s432-gaze-6
+      s433-gaze-1 s433-gaze-2 s433-gaze-3 s433-gaze-4 s433-gaze-5 s433-gaze-6
+      s434-gaze-1 s434-gaze-2 s434-gaze-3 s434-gaze-4 s434-gaze-5 s434-gaze-6
+      s435-gaze-1 s435-gaze-2 s435-gaze-3 s435-gaze-4 s435-gaze-6
+      s437-gaze-1 s437-gaze-2 s437-gaze-3 s437-gaze-4 s437-gaze-5 s437-gaze-6
+      s439-gaze-1 s439-gaze-2 s439-gaze-3 s439-gaze-4 s439-gaze-5 s439-gaze-6
+      s440-gaze-1 s440-gaze-2 s440-gaze-3 s440-gaze-4 s440-gaze-5 s440-gaze-6
+      s442-gaze-1 s442-gaze-2 s442-gaze-3 s442-gaze-4 s442-gaze-5 s442-gaze-6
+      s443-gaze-1 s443-gaze-2 s443-gaze-3 s443-gaze-4 s443-gaze-5 s443-gaze-6
+      s453-gaze-1 s453-gaze-2 s453-gaze-3 s453-gaze-4 s453-gaze-5 s453-gaze-6
+      s454-gaze-1 s454-gaze-2 s454-gaze-3 s454-gaze-4 s454-gaze-5 s454-gaze-6
+      s455-gaze-1 s455-gaze-2 s455-gaze-3 s455-gaze-4 s455-gaze-5 s455-gaze-6
+      s458-gaze-1 s458-gaze-2 s458-gaze-3 s458-gaze-4 s458-gaze-5 s458-gaze-6
+      s460-gaze-1 s460-gaze-2 s460-gaze-3 s460-gaze-4 s460-gaze-5 s460-gaze-6
+      s461-gaze-1 s461-gaze-2 s461-gaze-3 s461-gaze-4 s461-gaze-5 s461-gaze-6
+      s462-gaze-1 s462-gaze-2 s462-gaze-3 s462-gaze-4
+      s463-gaze-1 s463-gaze-2 s463-gaze-3 s463-gaze-4
+      s466-gaze-1 s466-gaze-2 s466-gaze-3 s466-gaze-4
+      s467-gaze-1 s467-gaze-2 s467-gaze-3 s467-gaze-4
+      s468-gaze-1 s468-gaze-2 s468-gaze-3 s468-gaze-4
+      s481-gaze-1 s481-gaze-2 s481-gaze-3 s481-gaze-4 s481-gaze-5 s481-gaze-6 s481-gaze-7 s481-gaze-8
+      s482-gaze-1 s482-gaze-2 s482-gaze-3 s482-gaze-4 s482-gaze-5 s482-gaze-6 s482-gaze-7 s482-gaze-8
+      s485-gaze-1 s485-gaze-2 s485-gaze-3 s485-gaze-4 s485-gaze-5 s485-gaze-6 s485-gaze-7 s485-gaze-8
+      s498-gaze-0 s498-gaze-1 s498-gaze-2 s498-gaze-3 s498-gaze-4 s498-gaze-5 s498-gaze-6 s498-gaze-7
+      s500-gaze-1 s500-gaze-2 s500-gaze-3 s500-gaze-4 s500-gaze-5 s500-gaze-6 s500-gaze-7 s500-gaze-8
+      s502-gaze-1 s502-gaze-2 s502-gaze-3 s502-gaze-4 s502-gaze-5 s502-gaze-6 s502-gaze-7 s502-gaze-8
+      s513-gaze-0 s513-gaze-1 s513-gaze-2 s513-gaze-3 s513-gaze-4 s513-gaze-5 s513-gaze-6 s513-gaze-7
+      s542-gaze-0 s542-gaze-1 s542-gaze-2 s542-gaze-3 s542-gaze-4 s542-gaze-5 s542-gaze-6 s542-gaze-7
+      s544-gaze-0 s544-gaze-1 s544-gaze-2 s544-gaze-3 s544-gaze-4 s544-gaze-5 s544-gaze-6 s544-gaze-7
+      s583-gaze-incar-lincoln-car22-0
+      s601-gaze-incar-kpi-car22-0 s601-gaze-incar-kpi-car22-1 s601-gaze-incar-kpi-car22-2
+      s577-gaze-incar-lincoln-car22-kpi-0 s577-gaze-incar-lincoln-car22-kpi-1 s577-gaze-incar-lincoln-car22-kpi-2 s577-gaze-incar-lincoln-car22-kpi-3
+      s563-gaze-incar-kpi-0 s563-gaze-incar-kpi-1 s563-gaze-incar-kpi-2 s563-gaze-incar-kpi-3
+      s558-gaze-incar-kpi-0 s558-gaze-incar-kpi-1 s558-gaze-incar-kpi-3
+      s578-gaze-incar-lincoln-car22-kpi-0 s578-gaze-incar-lincoln-car22-kpi-1 s578-gaze-incar-lincoln-car22-kpi-2 s578-gaze-incar-lincoln-car22-kpi-3
+      s579-gaze-incar-lincoln-car22-0 s579-gaze-incar-lincoln-car22-1 s579-gaze-incar-lincoln-car22-3
+      s582-gaze-incar-lincoln-car22-0 s582-gaze-incar-lincoln-car22-1 s582-gaze-incar-lincoln-car22-3
+      multipie_085 multipie_170 multipie_256 multipie_001 multipie_086
+      multipie_171 multipie_257 multipie_002 multipie_087 multipie_172 multipie_258
+      multipie_003 multipie_088 multipie_173 multipie_259 multipie_004 multipie_089
+      multipie_174 multipie_260 multipie_005 multipie_090 multipie_175 multipie_261
+      multipie_006 multipie_091 multipie_176 multipie_262 multipie_007 multipie_092
+      multipie_177 multipie_263 multipie_008 multipie_093 multipie_178 multipie_264
+      multipie_009 multipie_094 multipie_179 multipie_265 multipie_010 multipie_095
+      multipie_180 multipie_266 multipie_011 multipie_096 multipie_181 multipie_267
+      multipie_012 multipie_097 multipie_182 multipie_268 multipie_013 multipie_098
+      multipie_183 multipie_269 multipie_014 multipie_099 multipie_184 multipie_271
+      multipie_015 multipie_100 multipie_185 multipie_272 multipie_016 multipie_101
+      multipie_186 multipie_273 multipie_017 multipie_102 multipie_187 multipie_274
+      multipie_018 multipie_103 multipie_188 multipie_276 multipie_019 multipie_104
+      multipie_189 multipie_277 multipie_020 multipie_105 multipie_190 multipie_278
+      multipie_021 multipie_106 multipie_191 multipie_279 multipie_022 multipie_107
+      multipie_192 multipie_280 multipie_023 multipie_108 multipie_193 multipie_284
+      multipie_024 multipie_109 multipie_194 multipie_285 multipie_025 multipie_110
+      multipie_195 multipie_286 multipie_026 multipie_111 multipie_196 multipie_287
+      multipie_027 multipie_112 multipie_197 multipie_288 multipie_028 multipie_113
+      multipie_198 multipie_289 multipie_029 multipie_114 multipie_199 multipie_290
+      multipie_030 multipie_115 multipie_200 multipie_291 multipie_031 multipie_116
+      multipie_201 multipie_292 multipie_032 multipie_117 multipie_202 multipie_293
+      multipie_033 multipie_118 multipie_203 multipie_294 multipie_034 multipie_119
+      multipie_204 multipie_295 multipie_035 multipie_120 multipie_205 multipie_296
+      multipie_036 multipie_121 multipie_206 multipie_297 multipie_037 multipie_122
+      multipie_207 multipie_298 multipie_038 multipie_123 multipie_208 multipie_299
+      multipie_039 multipie_124 multipie_209 multipie_300 multipie_040 multipie_125
+      multipie_210 multipie_301 multipie_041 multipie_126 multipie_211 multipie_302
+      multipie_042 multipie_127 multipie_212 multipie_303 multipie_043 multipie_128
+      multipie_214 multipie_304 multipie_044 multipie_129 multipie_215 multipie_305
+      multipie_045 multipie_130 multipie_216 multipie_306 multipie_046 multipie_131
+      multipie_217 multipie_308 multipie_047 multipie_132 multipie_218 multipie_309
+      multipie_048 multipie_133 multipie_219 multipie_310 multipie_049 multipie_134
+      multipie_220 multipie_311 multipie_050 multipie_135 multipie_221 multipie_312
+      multipie_051 multipie_136 multipie_222 multipie_313 multipie_052 multipie_137
+      multipie_223 multipie_314 multipie_053 multipie_138 multipie_224 multipie_315
+      multipie_054 multipie_139 multipie_225 multipie_316 multipie_055 multipie_140
+      multipie_226 multipie_317 multipie_056 multipie_141 multipie_227 multipie_318
+      multipie_057 multipie_142 multipie_228 multipie_319 multipie_058 multipie_143
+      multipie_229 multipie_320 multipie_059 multipie_144 multipie_230 multipie_321
+      multipie_060 multipie_145 multipie_231 multipie_322 multipie_061 multipie_146
+      multipie_232 multipie_323 multipie_062 multipie_147 multipie_233 multipie_324
+      multipie_063 multipie_148 multipie_234 multipie_325 multipie_064 multipie_149
+      multipie_235 multipie_326 multipie_065 multipie_150 multipie_236 multipie_327
+      multipie_066 multipie_151 multipie_237 multipie_328 multipie_067 multipie_152
+      multipie_238 multipie_329 multipie_068 multipie_153 multipie_239 multipie_330
+      multipie_069 multipie_154 multipie_240 multipie_332 multipie_334 multipie_072
+      multipie_157 multipie_243 multipie_335 multipie_073 multipie_158 multipie_244
+      multipie_336 multipie_074 multipie_159 multipie_245 multipie_337 multipie_075
+      multipie_070 multipie_155 multipie_241 multipie_333 multipie_071 multipie_156
+      multipie_242 multipie_160 multipie_246 multipie_338 multipie_076 multipie_161
+      multipie_247 multipie_339
+    tfrecords_set_id_val: sclimate3-gaze-1 sclimate3-gaze-2 sclimate3-gaze-3 sclimate3-gaze-4 
+      s406-ar0144-1 s406-ar0144-2 s406-ar0144-3 s406-ar0144-4 s406-ar0144-5 s406-ar0144-6 s406-ar0144-7
+      s372_hp s382_hp s387_hp
+      s358 s359 s360 s383 s384 s385 s388 s389
+      s40-new-gray s41-new
+      germany-3-eoc-1 germany-3-eoc-2 germany-3-eoc-3 germany-3-eoc-4
+      s435-eoc-1 s435-eoc-2 s435-eoc-3 s435-eoc-4 s435-eoc-5 s435-eoc-6
+      germany-4-gaze-1 germany-4-gaze-2 germany-4-gaze-3 germany-4-gaze-4
+      germany-right-5-gaze-1 germany-right-5-gaze-2 germany-right-5-gaze-3 germany-right-5-gaze-4 germany-right-5-gaze-5
+      s438-gaze-1 s438-gaze-2 s438-gaze-3 s438-gaze-4 s438-gaze-5 s438-gaze-6
+      s451-gaze-1 s451-gaze-2 s451-gaze-3
+      s452-gaze-1 s452-gaze-2 s452-gaze-3
+      s459-gaze-1 s459-gaze-2 s459-gaze-3 s459-gaze-4 s459-gaze-5 s459-gaze-6
+      s469-gaze-1 s469-gaze-2 s469-gaze-3 s469-gaze-4
+      s470-gaze-1 s470-gaze-2 s470-gaze-3 s470-gaze-4
+      s478-gaze-kpi-1 s478-gaze-kpi-2 s478-gaze-kpi-3 s478-gaze-kpi-4 s478-gaze-kpi-5 s478-gaze-kpi-6 s478-gaze-kpi-7 s478-gaze-kpi-8
+      s487-gaze-1 s487-gaze-2 s487-gaze-3 s487-gaze-4 s487-gaze-5 s487-gaze-6 s487-gaze-7 s487-gaze-8
+      s501-gaze-0 s501-gaze-1 s501-gaze-2 s501-gaze-3 s501-gaze-4 s501-gaze-5 s501-gaze-6 s501-gaze-7
+      s503-gaze-0 s503-gaze-1 s503-gaze-2 s503-gaze-3 s503-gaze-4 s503-gaze-5 s503-gaze-6 s503-gaze-7
+      s514-gaze-0 s514-gaze-1 s514-gaze-2 s514-gaze-3 s514-gaze-4 s514-gaze-5 s514-gaze-6 s514-gaze-7
+      s585-gaze-incar-lincoln-car22-0 s585-gaze-incar-lincoln-car22-1 s585-gaze-incar-lincoln-car22-2 s585-gaze-incar-lincoln-car22-3
+      s570-gaze-incar-kpi-0
+      s586-gaze-incar-lincoln-car22-0
+      s584-gaze-incar-lincoln-car22-0 s584-gaze-incar-lincoln-car22-1
+      multipie_077 multipie_162 multipie_248 multipie_341 multipie_078 multipie_163
+      multipie_249
+    tfrecord_file_name: data.tfrecords
+    use_extra_dataset: false
+  image_info:
+    image:
+      channel: 1
+      height: 80
+      width: 80
+  kpiset_info:
+    tfrecords_set_id_kpi: multipie_342 multipie_079 multipie_164 multipie_250 multipie_343
+      multipie_080 multipie_165 multipie_251 multipie_344 multipie_081 multipie_166
+      multipie_252 multipie_345 multipie_082 multipie_167 multipie_253 multipie_346
+      multipie_083 multipie_168 multipie_254 multipie_084 multipie_169 multipie_255
+  num_keypoints: 80
+enable_visualization: true
+hooks: null
+infrequent_summary_every_n_steps: 0
+log_every_n_secs: 10
+loss:
+  __class_name__: FpeLoss
+  kpts_coeff: 0.01
+  loss_type: wing_loss
+  mask_occ: true
+  weights_dict: null
+  elt_loss_info:
+    elt_alpha: 0.5
+    enable_elt_loss: true
+    modulus_spatial_augmentation:
+      hflip_probability: 0.0
+      rotate_rad_max: 0.35
+      translate_max_x: 10
+      translate_max_y: 10
+      zoom_max: 1.2
+      zoom_min: 0.8
+model:
+  __class_name__: FpeNetBaseModel
+  model_parameters:
+    beta: 0.01
+    dropout_rate: 0.5
+    freeze_Convlayer: null
+    pretrained_model_path: null
+    regularizer_type: l2
+    regularizer_weight: 1.0e-05
+    train_fpe_model: true
+    type: FpeNet_base
+    use_less_face_layers: false
+    use_upsampling_layer: false
+  visualization_parameters: null
+num_epoch: 120
+num_keypoints: 80
+optimizer:
+  __class_name__: AdamOptimizer
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 1.0e-08
+  learning_rate_schedule:
+    __class_name__: SoftstartAnnealingLearningRateSchedule
+    annealing: 0.5
+    base_learning_rate: 0.0005
+    last_step: 1000000
+    min_learning_rate: 1.0e-07
+    soft_start: 0.3
+random_seed: 35
+visualize_num_images: 3

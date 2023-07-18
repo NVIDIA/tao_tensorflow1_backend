@@ -1,0 +1,42 @@
+training_config {
+  train_batch_size: 12
+  iterations_per_loop: 2
+  use_xla: False
+  disable_logging: False
+  # stop_at_epoch: 300
+  resume: False
+  checkpoint_period: 10
+  keep_checkpoint_max: 10
+  num_examples_per_epoch: 14700
+  num_epochs: 300
+  profile_skip_steps: 100
+  tf_random_seed: 42
+  lr_warmup_epoch: 5
+  lr_warmup_init: 0.00005
+  learning_rate: 0.1
+  amp: True
+  profile_skip_steps: 100
+  moving_average_decay: 0.9999
+  # l2_weight_decay: 0.000001
+}
+dataset_config {
+  num_classes: 91
+  image_size: "512, 512"
+  training_file_pattern: "/home/iva_2000/dataset/coco/train-*"
+  validation_file_pattern: "/home/iva_2000/dataset/coco/val-*"
+  validation_json_file: "/home/iva_2000/dataset/coco/annotations/instances_val2017.json"
+}
+eval_config {
+  eval_batch_size: 16
+  eval_epoch_cycle: 10
+  eval_after_training: True
+  eval_samples: 5000
+}
+augmentation_config {
+  random_crop_min_scale: 0.1
+  random_crop_min_scale: 2.0
+  rand_hflip: True
+}
+model_config {
+  model_name: 'efficientdet-d2'
+}

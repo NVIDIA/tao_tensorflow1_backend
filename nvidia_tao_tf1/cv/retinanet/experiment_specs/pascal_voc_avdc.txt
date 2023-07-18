@@ -1,0 +1,164 @@
+random_seed: 42
+retinanet_config {
+  aspect_ratios_global: "[1.0, 2.0, 0.5]"
+  scales: "[0.05, 0.15, 0.3, 0.45, 0.6, 0.75]"
+  # scales: "[0.05, 0.2, 0.35, 0.5, 0.65]"
+  two_boxes_for_ar1: false
+  clip_boxes: false
+  loss_loc_weight: 1.0
+  focal_loss_alpha: 0.25
+  focal_loss_gamma: 2.0
+  variances: "[0.1, 0.1, 0.2, 0.2]"
+  arch: "resnet"
+  nlayers: 18
+  n_kernels: 2
+  feature_size: 256
+  freeze_bn: False
+  freeze_blocks: 0
+}
+training_config {
+  batch_size_per_gpu: 16
+  num_epochs: 10
+  learning_rate {
+    soft_start_annealing_schedule {
+      min_learning_rate: 5e-5
+      max_learning_rate: 1e-2
+      soft_start: 0.1
+      annealing: 0.4
+    }
+  }
+  regularizer {
+    type: L1
+    weight: 2e-6
+  }
+}
+eval_config {
+  validation_period_during_training: 5
+  average_precision_mode: SAMPLE
+  batch_size: 16
+  matching_iou_threshold: 0.5
+}
+nms_config {
+  confidence_threshold: 0.01
+  clustering_iou_threshold: 0.5
+  top_k: 200
+}
+augmentation_config {
+  preprocessing {
+    output_image_width: 512
+    output_image_height: 512
+    output_image_channel: 3
+    crop_right: 512
+    crop_bottom: 512
+    min_bbox_width: 1.0
+    min_bbox_height: 1.0
+  }
+  spatial_augmentation {
+    hflip_probability: 0.5
+    zoom_min: 0.7
+    zoom_max: 1.2
+    translate_max_x: 8.0
+    translate_max_y: 8.0
+  }
+  color_augmentation {
+    hue_rotation_max: 25.0
+    saturation_shift_max: 0.20000000298
+    contrast_scale_max: 0.10000000149
+    contrast_center: 0.5
+  }
+}
+dataset_config {
+  data_sources: {
+    tfrecords_path: "{{input}}/tfrecords/pascal_voc/pascal_voc12_nodifficult_trainval*"
+    image_directory_path: "{{input}}/VOC2012"
+  }
+  data_sources: {
+    tfrecords_path: "{{input}}/tfrecords/pascal_voc/pascal_voc07_nodifficult_trainval*"
+    image_directory_path: "{{input}}/VOC2007"
+  }
+  image_extension: "jpg"
+  target_class_mapping {
+    key: "car"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "person"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "bicycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "dog"
+    value: "dog"
+  }
+  target_class_mapping {
+    key: "cat"
+    value: "cat"
+  }
+  target_class_mapping {
+    key: "aeroplane"
+    value: "aeroplane"
+  }
+  target_class_mapping {
+    key: "bird"
+    value: "bird"
+  }
+  target_class_mapping {
+    key: "boat"
+    value: "boat"
+  }
+  target_class_mapping {
+    key: "bottle"
+    value: "bottle"
+  }
+  target_class_mapping {
+    key: "bus"
+    value: "bus"
+  }
+  target_class_mapping {
+    key: "chair"
+    value: "chair"
+  }
+  target_class_mapping {
+    key: "cow"
+    value: "cow"
+  }
+  target_class_mapping {
+    key: "diningtable"
+    value: "diningtable"
+  }
+  target_class_mapping {
+    key: "horse"
+    value: "horse"
+  }
+  target_class_mapping {
+    key: "motorbike"
+    value: "motorbike"
+  }
+  target_class_mapping {
+    key: "pottedplant"
+    value: "pottedplant"
+  }
+  target_class_mapping {
+    key: "sheep"
+    value: "sheep"
+  }
+  target_class_mapping {
+    key: "sofa"
+    value: "sofa"
+  }
+  target_class_mapping {
+    key: "train"
+    value: "train"
+  }
+  target_class_mapping {
+    key: "tvmonitor"
+    value: "tvmonitor"
+  }
+  validation_data_source: {
+    tfrecords_path: "{{input}}/tfrecords/pascal_voc/pascal_voc07_nodifficult_test*"
+    image_directory_path: "{{input}}/VOC2007"
+  }
+}

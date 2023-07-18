@@ -1,0 +1,11 @@
+--- keras/__init__.py	2019-03-25 12:38:17.023118418 -0700
++++ keras/__init__2.py	2019-03-25 12:39:33.359695687 -0700
+@@ -24,3 +24,8 @@
+ from .models import Sequential
+ 
+ __version__ = '2.2.4'
++
++import third_party.keras.mixed_precision
++import third_party.keras.tensorflow_backend
++third_party.keras.mixed_precision.patch()
++third_party.keras.tensorflow_backend.patch()

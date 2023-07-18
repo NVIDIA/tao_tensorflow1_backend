@@ -1,0 +1,12 @@
+diff -Naur rules_protobuf-orig/python/rules.bzl rules_protobuf-patched/python/rules.bzl
+--- rules_protobuf-orig/python/rules.bzl 2019-04-10 10:54:31.694088490 +0300
++++ rules_protobuf-patched/python/rules.bzl	2019-04-10 10:46:08.699139146 +0300
+@@ -57,6 +57,8 @@
+     "with_grpc": with_grpc,
+   }
+
++  if "visibility" in kwargs:
++    proto_compile_args["visibility"] = kwargs["visibility"]
+   if protoc:
+     proto_compile_args["protoc"] = protoc
+   if pb_plugin:

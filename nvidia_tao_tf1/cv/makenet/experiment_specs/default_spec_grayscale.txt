@@ -1,0 +1,48 @@
+eval_config {
+  eval_dataset_path: "/home/projects1_metropolis/datasets/public/openimage176/test300"
+  model_path: "/home/projects1_metropolis/tmp/yuw/openimage_exp/squeezenet_test2/weights/squeezenet_066.tlt"
+  top_k: 3
+  batch_size: 256
+  n_workers: 8
+}
+model_config {
+  arch: "squeezenet"
+  retain_head: False
+  dropout: 1e-3
+  input_image_size: "1,224,224"
+}
+train_config {
+  random_seed: 42
+  train_dataset_path: "/home/projects1_metropolis/datasets/public/openimage176/train"
+  val_dataset_path: "/home/projects1_metropolis/datasets/public/openimage176/val"
+  optimizer {
+    sgd {
+    lr: 0.01
+    decay: 0.0
+    momentum: 0.9
+    nesterov: False
+  }
+}
+  batch_size_per_gpu: 256
+  n_epochs: 80
+  n_workers: 16
+ 
+  # regularizer
+  reg_config {
+    type: "L2"
+    scope: "Conv2D,Dense"
+    weight_decay: 0.00005
+  }
+ 
+  # learning_rate
+  lr_config {
+    soft_anneal {
+      learning_rate: 0.05
+      soft_start: 0.056
+      annealing_points: 0.3
+      annealing_points: 0.6
+      annealing_points: 0.8
+      annealing_divider: 10
+    }
+  }
+}

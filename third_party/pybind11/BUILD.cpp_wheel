@@ -1,0 +1,17 @@
+load("@//tools:rules.bzl", "genrule_directory")
+
+genrule_directory(
+    name = "include",
+    srcs = [":pybind11"],
+    cmd = "mkdir -p $@ && cp -r $</pybind11-2.2.4.data/headers $@/pybind11",
+)
+
+cc_library(
+    name = "cpp",
+    hdrs = [":include"],
+    includes = ["include"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@//third_party/python:headers",
+    ],
+)

@@ -1,0 +1,107 @@
+__class_name__: BpNetTrainer
+checkpoint_dir: /home/sakthi/results/model_exp/050321/base_train/vgg_lite_lr12e5softstart00505_l1_tltpc_256x256_2stg_8gpu
+log_every_n_secs: 120
+checkpoint_n_epoch: 10
+num_epoch: 120
+summary_every_n_steps: 20
+infrequent_summary_every_n_steps: 0
+validation_every_n_epoch: 5
+max_ckpt_to_keep: 50
+random_seed: 42
+pretrained_weights: /home/swiftstack/drive-ix-train/sakthi/bodypose/experiments/models/openimages/tlt_pretrained_classification_vvgg19/vgg_19.hdf5
+# pretrained_weights: /home/swiftstack/drive-ix-train/sakthi/bodypose/experiments/models/openimages/vgg19_v1/vgg19.hdf5
+load_graph: False
+finetuning_config:
+  is_finetune_exp: False
+  checkpoint_path: null
+  ckpt_epoch_num: 0
+use_stagewise_lr_multipliers: True
+dataloader:
+  __class_name__: BpNetDataloader
+  batch_size: 10
+  pose_config:
+    __class_name__: BpNetPoseConfig
+    target_shape: [32, 32]
+    pose_config_path: nvidia_tao_tf1/cv/bpnet/dataloaders/pose_configurations/bpnet_18joints.json
+  image_config:
+    image_dims:
+      height: 256
+      width: 256
+      channels: 3
+    image_encoding: jpg
+  dataset_config:
+    root_data_path: /home/swiftstack/drive-ix-train/DataCollection/BodyPoseData/postData/mscoco2017/
+    train_records_folder_path: /home/swiftstack/drive-ix-train/DataCollection/BodyPoseData/postData/mscoco2017/mscoco_tfrecords/032921
+    train_records_path: [pc1-train-fold-000-of-001]
+    val_records_folder_path: /home/swiftstack/drive-ix-train/DataCollection/BodyPoseData/postData/mscoco2017/mscoco_tfrecords/032921
+    val_records_path: [pc1-val-fold-000-of-001]
+    dataset_specs:
+      coco: nvidia_tao_tf1/cv/bpnet/dataio/dataset_specs/coco_spec.json
+  normalization_params: 
+    image_scale: [256.0, 256.0, 256.0]
+    image_offset: [0.5, 0.5, 0.5]
+    mask_scale: [255.0]
+    mask_offset: [0.0]
+  augmentation_config:
+    __class_name__: AugmentationConfig
+    spatial_augmentation_mode: person_centric
+    spatial_aug_params:
+      flip_lr_prob: 0.5
+      flip_tb_prob: 0.0
+      rotate_deg_max: 40.0
+      rotate_deg_min: -40.0
+      zoom_prob: 0.0
+      zoom_ratio_min: 1.0
+      zoom_ratio_max: 1.0
+      translate_max_x: 40.0
+      translate_min_x: -40.0
+      translate_max_y: 40.0
+      translate_min_y: -40.0
+      use_translate_ratio: False
+      translate_ratio_max: 0.2
+      translate_ratio_min: 0.2
+      target_person_scale: 0.6
+    identity_spatial_aug_params:
+      null
+  label_processor_config:
+    paf_gaussian_sigma: 0.03
+    heatmap_gaussian_sigma: 7.0
+    paf_ortho_dist_thresh: 1.0
+  shuffle_buffer_size: 20000
+model:
+  __class_name__: BpNetLiteModel
+  backbone_attributes:
+    architecture: vgg
+    mtype: default
+    use_bias: False
+  stages: 2
+  heat_channels: 19
+  paf_channels: 38
+  use_self_attention: False
+  data_format: channels_last
+  use_bias: True
+  regularization_type: l1
+  kernel_regularization_factor: 5.0e-4
+  bias_regularization_factor: 0.0
+  kernel_initializer: random_normal
+optimizer:
+  __class_name__: WeightedMomentumOptimizer
+  learning_rate_schedule:
+    __class_name__: SoftstartAnnealingLearningRateSchedule
+    soft_start: 0.05
+    annealing: 0.5
+    base_learning_rate: 12.e-5
+    min_learning_rate: 8.e-08
+    last_step: null
+  grad_weights_dict: null
+  weight_default_value: 1.0
+  momentum: 0.9
+  use_nesterov: False
+loss:
+  __class_name__: BpNetLoss
+  focal_loss_params:
+    use_focal_loss: False
+    alpha: 0.1
+    beta: 0.02
+    bkg_thresh: 0.01
+    gamma: 1

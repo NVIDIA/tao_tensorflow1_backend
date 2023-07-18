@@ -1,0 +1,12 @@
+model_path: /home/sakthi/results/030921_vgg_256x256_4gpu_288100.hdf5
+train_spec: nvidia_tao_tf1/cv/bpnet/experiment_specs/experiment_spec_coco.yaml
+input_shape: [256, 256]
+# choose from: {pad_image_input, adjust_network_input, None}
+keep_aspect_ratio_mode: adjust_network_input
+output_stage_to_use: null
+output_upsampling_factor: [8, 8]
+heatmap_threshold: 0.1
+paf_threshold: 0.05
+multi_scale_inference: False
+# scales: [2.0]
+scales: [0.5, 1.0, 1.5, 2.0]

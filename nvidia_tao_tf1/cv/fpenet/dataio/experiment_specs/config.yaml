@@ -1,0 +1,10 @@
+sets: [s578-usercalibration-incar-0, s578-usercalibration-incar-1]
+gt_path: 'shagan/fpenet/tfrecords/GT'
+save_path: 'shagan/fpenet/tfrecords/test'
+gt_root_path: '/home/driveix.cosmos639/'
+save_root_path: '/home/driveix.cosmos639/'
+image_root_path: '/home/driveix.cosmos639/'
+tfrecord_folder: 'FpeTfRecords'
+tfrecord_name: 'data.tfrecords'
+num_keypoints: 80
+bbox_enlarge_ratio: 1.0

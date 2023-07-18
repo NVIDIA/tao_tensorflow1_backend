@@ -1,0 +1,80 @@
+random_seed: 42
+retinanet_config {
+  aspect_ratios_global: "[1.0, 2.0, 0.5]"
+  scales: "[0.05, 0.2, 0.35, 0.5, 0.65, 0.8]"
+  two_boxes_for_ar1: False
+  clip_boxes: False
+  loss_loc_weight: 1.0
+  focal_loss_alpha: 0.25
+  focal_loss_gamma: 2.0
+  variances: "[0.1, 0.1, 0.2, 0.2]"
+  arch: "resnet"
+  nlayers: 18
+  n_kernels: 2
+  feature_size: 256
+  freeze_bn: True
+  freeze_blocks: 0
+  freeze_blocks: 1
+  n_anchor_levels: 3
+}
+training_config {
+  batch_size_per_gpu: 16
+  enable_qat: False
+  checkpoint_interval: 1
+  num_epochs: 2
+    optimizer {
+    sgd {
+      momentum: 0.9
+      nesterov: True
+    }
+  }
+  learning_rate {
+    soft_start_annealing_schedule {
+      min_learning_rate: 5e-5
+      max_learning_rate: 4e-2
+      soft_start: 0.01
+      annealing: 0.3
+    }
+  }
+  regularizer {
+    type: L1
+    weight: 3.00000002618e-09
+  }
+}
+eval_config {
+  average_precision_mode: SAMPLE
+  batch_size: 16
+  matching_iou_threshold: 0.5
+}
+nms_config {
+  confidence_threshold: 0.01
+  clustering_iou_threshold: 0.8
+  top_k: 200
+} 
+augmentation_config {
+  output_width: 512
+  output_height: 512
+  output_channel: 3
+}
+dataset_config {
+  data_sources: {
+    image_directory_path: "/workspace/tlt-experiments/data/VOCdevkit/VOC2012/JPEGImages_kitti/trainval"
+    label_directory_path: "/workspace/tlt-experiments/data/VOCdevkit/VOC2012/Annotations_kitti/trainval"
+  }
+  target_class_mapping {
+    key: "car"
+    value: "car"
+  }
+  target_class_mapping {
+    key: "person"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "bicycle"
+    value: "bicycle"
+  }
+  validation_data_sources: {
+    image_directory_path: "/workspace/tlt-experiments/data/VOCdevkit/VOC2012/JPEGImages_kitti/test"
+    label_directory_path: "/workspace/tlt-experiments/data/VOCdevkit/VOC2012/Annotations_kitti/test"
+  }
+}

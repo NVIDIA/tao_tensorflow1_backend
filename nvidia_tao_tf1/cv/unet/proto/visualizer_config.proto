@@ -1,0 +1,22 @@
+// Copyright (c) 2017-2019, NVIDIA CORPORATION.  All rights reserved.
+
+/**
+* visualizer_config.proto: Protocol buffer definition for training visualizations.
+*/
+
+syntax = "proto3";
+
+import "nvidia_tao_tf1/cv/common/proto/wandb_config.proto";
+import "nvidia_tao_tf1/cv/common/proto/clearml_config.proto";
+
+message VisualizerConfig {
+    // Master switch.
+    bool enabled = 1;
+    uint32 save_summary_steps = 2;
+    uint32 infrequent_save_summary_steps = 3;
+
+    // configuration setting for weights and biases.
+    WandBConfig wandb_config = 4;
+    // configuration setting for clearml.
+    ClearMLConfig clearml_config = 5;
+}

@@ -1,0 +1,101 @@
+random_seed: 42
+model_config {
+  num_layers: 10
+  model_input_width: 572
+  model_input_height: 572
+  model_input_channels: 1
+all_projections: true
+arch: "simple_unet"
+  use_batch_norm: true
+  training_precision {
+    backend_floatx: FLOAT32
+  }
+}
+
+training_config {
+  batch_size: 3
+  max_steps: 120
+  use_xla: true
+  use_amp: False
+  log_every: 10
+  loss: "cross_entropy"
+  learning_rate:0.0001
+  regularizer {
+    type: L1
+    weight: 3.00000002618e-09
+  }
+  optimizer {
+    adam {
+      epsilon: 9.99999993923e-09
+      beta1: 0.899999976158
+      beta2: 0.999000012875
+    }
+  }
+}
+
+
+dataset_config {
+
+dataset: "custom"
+augment: true
+input_image_type: "grayscale"
+train_images_path:"/home/projects1_metropolis/tmp/subha/unet/data/isbi/images/train"
+train_masks_path:"/home/projects1_metropolis/tmp/subha/unet/data/isbi/masks/train"
+
+val_images_path:"/home/projects1_metropolis/tmp/subha/unet/data/isbi/images/val"
+val_masks_path:"/home/projects1_metropolis/tmp/subha/unet/data/isbi/masks/val"
+
+test_images_path:"/home/projects1_metropolis/tmp/subha/unet/data/isbi/images/test"
+
+image_extension: ".png"
+
+data_class_config {
+  target_classes {
+    name: "foreground"
+    mapping_class: "foreground"
+    label_id: 0
+  }
+  target_classes {
+    name: "background"
+    mapping_class: "background"
+    label_id: 1
+  }
+}
+
+}
+
+
+
+
+
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube/list_target_11_20_week_1_to_4.txt"
+  masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube/list_target_11_20_week_1_to_4_lbl.txt"
+}
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/gs/GS_512x288_checkered_pose_good_licensed_bgs_train_test_val_split_perc_30/train_unbalanced.txt"
+  masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/gs/GS_512x288_checkered_pose_good_licensed_bgs_train_test_val_split_perc_30/train_unbalanced_lbl.txt"
+}
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube/production_split_excluded_vids_with_sprint_files/train_balanced.txt"
+masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube/production_split_excluded_vids_with_sprint_files/train_balanced_lbl.txt"
+}
+
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube_cc_by_no_folders/list_fixed_no_folders_imgs.txt"
+  masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube_cc_by_no_folders/list_fixed_no_folders_lbls.txt"
+}
+
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/backgrounds/train_bgs.txt"
+  masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/backgrounds/train_bgs_lbl.txt"
+}
+
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube/list_target_11_20_week_5_to_8_with_issues_jpg.txt"
+  masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/youtube/list_target_11_20_week_5_to_8_with_issues_png.txt"
+}
+data_source: {
+image_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/rtx_vids_dataset/list_rtx_vids_dataset_images_jpg.txt"
+  masks_path: "/home/subhashreer/swcam_scratch/nkumarrai/bgseg/experiments/libcamsoldnn/data/production/rtx_vids_dataset/list_rtx_vids_dataset_labels_png.txt"
+}

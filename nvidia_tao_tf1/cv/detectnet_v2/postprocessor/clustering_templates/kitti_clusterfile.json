@@ -1,0 +1,54 @@
+{
+    "dbscan_criterion": "IOU",
+    "dbscan_eps": {
+        "cyclist": 0.25,
+        "pedestrian": 0.35,
+        "default": 0.15,
+        "car": 0.3
+    },
+    "dbscan_min_samples": {
+        "cyclist": 0.05,
+        "pedestrian": 0.05,
+        "default": 0.0,
+        "car": 0.05
+    },
+    "min_cov_to_cluster": {
+        "cyclist": 0.005,
+        "pedestrian": 0.005,
+        "default": 0.005,
+        "car": 0.005
+    },
+    "min_obj_height": {
+        "cyclist": 4,
+        "pedestrian": 4,
+        "car": 4,
+        "default": 2
+    },
+    "target_classes": ["car", "cyclist", "pedestrian"],
+    "confidence_th": {
+        "pedestrian": 0.6,
+        "cyclist": 0.6,
+        "car": 0.6
+    },
+    "confidence_model": {
+        "car": { "kind": "aggregate_cov"},
+        "pedestrian": { "kind": "aggregate_cov"},
+        "cyclist": { "kind": "aggregate_cov"},
+        "default": { "kind": "aggregate_cov"}
+    },
+    "output_map": {
+        "car" : "car",
+        "cyclist" : "cyclist",
+        "pedestrian" : "pedestrian"
+    },
+    "color": {
+        "car": "green",
+        "cyclist": "magenta",
+        "pedestrian": "cyan",
+        "default": "blue"
+    },
+    "postproc_classes": ["car", "cyclist", "pedestrian"],
+    "image_height": 384,
+    "image_width": 1248,
+    "stride": 16
+}

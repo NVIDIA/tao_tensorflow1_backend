@@ -1,0 +1,7 @@
+{
+    "field_1": "test_result_1",
+    "field_2": {
+        "subfield_1":"subfield_1_result",
+        "subfield_2": 1.234
+    }
+}

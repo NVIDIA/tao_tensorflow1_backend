@@ -1,0 +1,96 @@
+__class_name__: FpeNetTrainer
+checkpoint_dir: /home/driveix.cosmos639/shagan/fpenet/temp/
+checkpoint_n_epoch: 1
+dataloader:
+  __class_name__: FpeNetDataloader
+  augmentation_info:
+    augmentation_resize_probability: 0.5
+    augmentation_resize_scale: 1.6
+    enable_occlusion_augmentation: true
+    enable_online_augmentation: true
+    enable_resize_augmentation: true
+    gamma_augmentation:
+      gamma_max: 1.6
+      gamma_min: 0.6
+      gamma_probability: 0.1
+      gamma_type: uniform
+    modulus_spatial_augmentation:
+      hflip_probability: 0.25
+      rotate_rad_max: 0.35
+      translate_max_x: 10
+      translate_max_y: 10
+      zoom_max: 1.2
+      zoom_min: 0.8
+    patch_probability: 0.5
+    size_to_image_ratio: 0.5
+    mask_augmentation_patch: true
+  batch_size: 64
+  dataset_info:
+    image_extension: png
+    no_occlusion_masking_sets: s578-usercalibration-incar-0 s578-usercalibration-incar-1
+    root_path: /home/image_path/
+    test_file_name: data.tfrecords
+    tfrecord_folder_name: FpeTfRecords
+    tfrecords_directory_path: /home/gt_input
+    tfrecords_set_id_train: s578-usercalibration-incar-0 s578-usercalibration-incar-1
+    tfrecords_set_id_val: s578-usercalibration-incar-0 s578-usercalibration-incar-1
+    tfrecord_file_name: data.tfrecords
+    use_extra_dataset: false
+  image_info:
+    image:
+      channel: 1
+      height: 80
+      width: 80
+  kpiset_info:
+    tfrecords_set_id_kpi: s578-usercalibration-incar-0 s578-usercalibration-incar-1
+  num_keypoints: 80
+enable_visualization: true
+hooks: null
+infrequent_summary_every_n_steps: 0
+log_every_n_secs: 10
+loss:
+  __class_name__: FpeLoss
+  kpts_coeff: 0.01
+  loss_type: wing_loss
+  mask_occ: true
+  weights_dict: null
+  elt_loss_info:
+    elt_alpha: 0.5
+    enable_elt_loss: true
+    modulus_spatial_augmentation:
+      hflip_probability: 0.0
+      rotate_rad_max: 0.35
+      translate_max_x: 10
+      translate_max_y: 10
+      zoom_max: 1.2
+      zoom_min: 0.8
+model:
+  __class_name__: FpeNetBaseModel
+  model_parameters:
+    beta: 0.01
+    dropout_rate: 0.5
+    freeze_Convlayer: null
+    pretrained_model_path: null
+    regularizer_type: l2
+    regularizer_weight: 1.0e-05
+    train_fpe_model: true
+    type: FpeNet_base
+    use_less_face_layers: false
+    use_upsampling_layer: false
+  visualization_parameters: null
+num_epoch: 160
+num_keypoints: 80
+optimizer:
+  __class_name__: AdamOptimizer
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 1.0e-08
+  learning_rate_schedule:
+    __class_name__: SoftstartAnnealingLearningRateSchedule
+    annealing: 0.5
+    base_learning_rate: 0.0005
+    last_step: 1000000
+    min_learning_rate: 1.0e-07
+    soft_start: 0.3
+random_seed: 35
+visualize_num_images: 3

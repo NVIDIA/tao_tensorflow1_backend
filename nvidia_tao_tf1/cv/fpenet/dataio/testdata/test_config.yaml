@@ -1,0 +1,10 @@
+sets: [testdata]
+gt_path: 'nvidia_tao_tf1/cv/fpenet/dataio'
+save_path: 'nvidia_tao_tf1/cv/fpenet/dataio'
+gt_root_path: ''
+save_root_path: ''
+image_root_path: ''
+tfrecord_folder: 'FpeTfRecords'
+tfrecord_name: 'data.tfrecords'
+num_keypoints: 80
+bbox_enlarge_ratio: 1.0

@@ -1,0 +1,11 @@
+kitti_config {
+  root_directory_path: "/home/projects.dlar_artifacts/kitti_detection/training/"
+  image_dir_name: "image_2"
+  label_dir_name: "label_2"
+  kitti_sequence_to_frames_file: "kitti_sequence_to_frames.json"
+  partition_mode: "sequence"
+  num_partitions: 5
+  num_shards: 0
+  image_extension: '.png'
+}
+image_directory_path: "/home/projects.dlar_artifacts/kitti_detection/training/"

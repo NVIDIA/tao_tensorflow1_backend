@@ -1,0 +1,44 @@
+version: 2
+storageSecret: iva-swift-creds
+experimental:
+  queueType: redis_binary 
+
+tasks:
+
+- name: train
+  local_image: bazel/iva/common:image
+  
+  inputs:
+  - volume:
+      name: 1-clean-datasets-outputs
+      version: 1aec5a35-c988-5e3a-b2ab-9a7af6f33eaa
+    prefix: /datasets/all
+  - url: swift://swiftstack-maglev.ngc.nvidia.com/iva/iva-export/tmp/alice
+  - url: swift://swiftstack-maglev.ngc.nvidia.com/iva/iva-export/datasets/pascal_tfrecords
+    prefix: datasets/pascal_tfrecords
+  outputs:
+  - url: swift://swiftstack-maglev.ngc.nvidia.com/iva/iva-scratch/
+  command: /bin/bash
+  args: ["-euxo" ,"pipefail", "-c", "export DATA_BASE_PATH={{input}} && \
+                                    mpirun -np 2 --oversubscribe --bind-to none python nvidia_tao_tf1/cv/retinanet/scripts/train \
+                                    -e {{input}}/{{workflow_name}}/{{job_id}}/experiment_spec.cfg \
+                                    -m {{input}}/resnet_18.hdf5 \
+                                    -r {{output}} \
+                                    -k pascal"]
+  fail: never
+  group: all
+  cache: disable
+  replicas: 2
+  workerPool: pool-1-gpu
+
+
+
+workerPools:
+  - name: pool-1-gpu
+    workers: 2
+    cpu: "10"
+    gpu: "2"
+    mem: 32G
+  
+
+

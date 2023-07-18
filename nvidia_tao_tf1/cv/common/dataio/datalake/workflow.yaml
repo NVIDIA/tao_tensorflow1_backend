@@ -1,0 +1,20 @@
+version: 2
+tasks:
+- name: pyspark
+  local_image: bazel/driveix/dataio/datalake:catalog_image
+  command: bash
+  args:
+  - -xc
+  - /opt/spark/sbin/spark-cluster spark-submit driveix/dataio/datalake/split_gaze_dataset.py
+  cache: disable
+  secrets:
+    - name: maglev-authn
+      keys:
+      - key: api-key
+        env: MAGLEV_API_KEY  
+workerPools:
+- name: default
+  workers: 10
+  cpu: 10
+  mem: 8Gi
+  scheduler: gang

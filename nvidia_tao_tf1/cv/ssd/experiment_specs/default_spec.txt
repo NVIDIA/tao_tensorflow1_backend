@@ -1,0 +1,137 @@
+random_seed: 42
+dssd_config {
+  aspect_ratios_global: "[1.0, 2.0, 0.5, 3.0, 0.33]"
+  scales: "[0.1, 0.24166667, 0.38333333, 0.525, 0.66666667, 0.80833333, 0.95]"
+  two_boxes_for_ar1: true
+  clip_boxes: false
+  variances: "[0.1, 0.1, 0.2, 0.2]"
+  arch: "resnet"
+  nlayers: 18
+  pred_num_channels: 128
+  freeze_bn: False
+  freeze_blocks: 0
+  freeze_blocks: 1
+}
+training_config {
+  batch_size_per_gpu: 64
+  num_epochs: 120
+  learning_rate {
+  soft_start_annealing_schedule {
+    min_learning_rate: 5e-5
+    max_learning_rate: 4e-2
+    soft_start: 0.01
+    annealing: 0.3
+  }
+  }
+  regularizer {
+    type: L1
+    weight: 3.00000002618e-09
+  }
+}
+eval_config {
+  validation_period_during_training: 10
+  average_precision_mode: SAMPLE
+  batch_size: 64
+  matching_iou_threshold: 0.5
+}
+nms_config {
+  confidence_threshold: 0.01
+  clustering_iou_threshold: 0.8
+  top_k: 200
+}
+augmentation_config {
+    output_width: 300
+    output_height: 300
+    output_channel: 3
+}
+dataset_config {
+  data_sources: {
+    label_directory_path: "/workspace/tlt_training/ssd_baseline/pascal_voc/train_0712/KITTI/"
+    image_directory_path: "/workspace/tlt_training/ssd_baseline/pascal_voc/train_0712/images"
+  }
+  include_difficult_in_training: true
+  target_class_mapping {
+    key: "sheep"
+    value: "sheep"
+  }
+  target_class_mapping {
+    key: "bottle"
+    value: "bottle"
+  }
+  target_class_mapping {
+    key: "horse"
+    value: "horse"
+  }
+  target_class_mapping {
+    key: "bicycle"
+    value: "bicycle"
+  }
+  target_class_mapping {
+    key: "motorbike"
+    value: "motorbike"
+  }
+  target_class_mapping {
+    key: "cow"
+    value: "cow"
+  }
+  target_class_mapping {
+    key: "sofa"
+    value: "sofa"
+  }
+  target_class_mapping {
+    key: "dog"
+    value: "dog"
+  }
+  target_class_mapping {
+    key: "cat"
+    value: "cat"
+  }
+  target_class_mapping {
+    key: "person"
+    value: "person"
+  }
+  target_class_mapping {
+    key: "train"
+    value: "train"
+  }
+  target_class_mapping {
+    key: "diningtable"
+    value: "diningtable"
+  }
+  target_class_mapping {
+    key: "aeroplane"
+    value: "aeroplane"
+  }
+  target_class_mapping {
+    key: "bus"
+    value: "bus"
+  }
+  target_class_mapping {
+    key: "pottedplant"
+    value: "pottedplant"
+  }
+  target_class_mapping {
+    key: "tvmonitor"
+    value: "tvmonitor"
+  }
+  target_class_mapping {
+    key: "chair"
+    value: "chair"
+  }
+  target_class_mapping {
+    key: "bird"
+    value: "bird"
+  }
+  target_class_mapping {
+    key: "boat"
+    value: "boat"
+  }
+  target_class_mapping {
+    key: "car"
+    value: "car"
+  }
+  validation_data_sources: {
+    label_directory_path: "/workspace/tlt_training/ssd_baseline/pascal_voc/test_07/KITTI"
+    image_directory_path: "/workspace/tlt_training/ssd_baseline/pascal_voc/test_07/images"
+  }
+}
