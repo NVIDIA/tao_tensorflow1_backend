@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
 set -eo pipefail
+cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-# Run the env setup script so as to set repository root path.
-source "../scripts/envsetup.sh"
-
-registry="nvcr.io"
-repository="nvidia/tao/tao-toolkit"
-
-tag="5.0.0-tf1.15.5-base"
-local_tag="$USER"
+# Read parameters from manifest.json
+registry=`jq -r '.registry' $NV_TAO_TF_TOP/docker/manifest.json`
+repository=`jq -r '.repository' $NV_TAO_TF_TOP/docker/manifest.json`
+tag=`jq -r '.tag' $NV_TAO_TF_TOP/docker/manifest.json`
 
 # Build parameters.
 BUILD_DOCKER="0"
@@ -65,12 +62,11 @@ if [ $BUILD_DOCKER = "1" ]; then
         NO_CACHE=""
     fi
 
-    docker build --pull -f $NV_TAO_TF_TOP/docker/Dockerfile -t $registry/$repository:$local_tag $NO_CACHE \
+    docker build --pull -f $NV_TAO_TF_TOP/docker/Dockerfile -t $registry/$repository:$tag $NO_CACHE \
         --network=host $NV_TAO_TF_TOP/.
 
     if [ $PUSH_DOCKER = "1" ]; then
         echo "Pusing docker ..."
-        docker tag $registry/$repository:$local_tag $registry/$repository:$tag
         docker push $registry/$repository:$tag
         digest=$(docker inspect --format='{{index .RepoDigests 0}}' $registry/$repository:$tag)
         echo -e "\033[1;33mUpdate the digest in the manifest.json file to:\033[0m"
