@@ -80,7 +80,7 @@ if [ $BUILD_DOCKER = "1" ]; then
         echo "Skipping wheel builds ..."
     fi
     
-    docker build --pull -f $NV_TAO_TF_TOP/release/docker/Dockerfile.release -t $registry/$repository:$tag $NO_CACHE --network=host $NV_TAO_TF_TOP/.
+    docker build -f $NV_TAO_TF_TOP/release/docker/Dockerfile.release -t $registry/$repository:$tag $NO_CACHE --network=host $NV_TAO_TF_TOP/.
 
     if [ $PUSH_DOCKER = "1" ]; then
         echo "Pusing docker ..."
