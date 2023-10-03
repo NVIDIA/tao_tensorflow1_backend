@@ -55,7 +55,7 @@ tf2onnx==1.9.2
 tqdm>=4.19.5
 toposort==1.5
 uplink==0.5.5
-urllib3==1.26.5
+urllib3==1.26.17
 wandb<=0.13.4
 https://files.pythonhosted.org/packages/d1/c2/c14dd8884a5bc05ca07331b3d78a92812eb19e25a625a0b59af8b609a93f/nvidia_eff_tao_encryption-0.1.7-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 https://files.pythonhosted.org/packages/cf/ec/47f770919111bcd7047e463389e7f763afbc6ae7b96cbd4be974342a5bb1/nvidia_eff-0.6.2-py38-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
