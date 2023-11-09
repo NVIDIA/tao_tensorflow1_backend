@@ -29,7 +29,7 @@ Pillow<9.0.0
 posix_ipc==1.0.4
 prettytable==0.7.2
 pyarmor==7.7.4
-pyarrow==8.0.0
+pyarrow==14.0.1
 pycocotools-fix==2.0.0.9
 pycuda==2022.2.2
 pydocstyle==6.3.0
