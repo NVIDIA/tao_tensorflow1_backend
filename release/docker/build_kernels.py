@@ -4,8 +4,8 @@ import os
 import subprocess
 import sys
 
-from ci.utils import CI
 from nvidia_tao_tf1.core.utils.path_utils import expand_path
+
 
 def execute_command(command_args):
     """Execute the shell command."""
@@ -84,8 +84,6 @@ def main(cl_args=sys.argv[1:]):
     force_build = args["force"]
     op_names = args["op_names"]
     env_var = "NV_TAO_TF_TOP"
-    if CI:
-        env_var = "CI_PROJECT_DIR"
     if "WORKSPACE" not in os.environ.keys():
         os.environ["WORKSPACE"] = os.getenv(env_var, "/workspace/tao-tf1")
     h_path = os.getenv(env_var, "/workspace/tao-tf1")
@@ -101,3 +99,4 @@ def main(cl_args=sys.argv[1:]):
 
 if __name__ == "__main__":
     main()
+
